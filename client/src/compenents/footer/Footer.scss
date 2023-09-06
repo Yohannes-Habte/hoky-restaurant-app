@@ -1,0 +1,46 @@
+@import '../../styles/Variables.scss';
+@import '../../styles/Mixins.scss';
+
+.footer {
+  background-color: $footer-bg;
+  color: $footer-color;
+
+  .footer-sections {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    .footer-section {
+      display: flex;
+      flex-direction: column;
+
+      .subTitle {
+        @include subTitle;
+        padding-left: 0;
+      }
+
+      .footer-list-items {
+        display: flex;
+        flex-direction: column;
+        line-height: 2rem;
+
+        .list-item {
+          font-size: $afs;
+
+          .nav-link {
+            color: $footer-color;
+          }
+        }
+      }
+    }
+  }
+
+  .copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    background-color: $copyright;
+  }
+}

@@ -1,0 +1,33 @@
+@import '../../styles/Variables.scss';
+@import '../../styles/Mixins.scss';
+
+.home-page {
+  .heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2rem 0 0 0;
+
+    .title {
+      @include subTitle;
+      font-size: $aafs;
+    }
+    .button {
+      @include btn2;
+    }
+  }
+
+  .horizontal-line {
+    height: 2px;
+    background-color: #e8e4e4;
+  }
+
+  .categories {
+    margin: 2rem 0 0 0;
+
+    .categories-title {
+      @include title;
+      justify-content: flex-start;
+    }
+  }
+}

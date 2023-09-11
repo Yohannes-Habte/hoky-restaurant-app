@@ -3,6 +3,7 @@ export const USER_CART_ACTION = {
   // User
   USER_REGISTER: 'USER_REGISTER',
   USER_SIGNIN: 'USER_SIGNIN',
+  UPDATE_USER_DATA: 'UPDATE_USER_DATA',
   IS_USER_LOGGED_IN: 'IS_USER_LOGGED_IN',
   USER_LOG_OUT: 'USER_LOG_OUT',
   // Cart
@@ -23,6 +24,10 @@ const UserCartReducer = (state, action) => {
 
     // User Login
     case USER_CART_ACTION.USER_SIGNIN:
+      return { ...state, user: action.payload };
+
+    // User Login
+    case USER_CART_ACTION.UPDATE_USER_DATA:
       return { ...state, user: action.payload };
 
     // Is User Login In

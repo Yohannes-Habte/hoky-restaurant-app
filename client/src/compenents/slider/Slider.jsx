@@ -43,9 +43,9 @@ const Slider = () => {
 
   return (
     <div className="slider">
-      <FiArrowLeftCircle onClick={previousSlide} />
+      <FiArrowLeftCircle className='arrow prev' onClick={previousSlide} />
 
-      <FiArrowRightCircle onClick={nextSlide} />
+      <FiArrowRightCircle className='arrow next' onClick={nextSlide} />
 
       {sliderData.map((slider, index) => {
         const { image, heading, desc } = slider;

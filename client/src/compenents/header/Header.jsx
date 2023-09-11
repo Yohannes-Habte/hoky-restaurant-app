@@ -128,6 +128,12 @@ const Header = () => {
               Contact
             </NavLink>
           </li>
+
+          <li onClick={hideMenu} className="navbar-item">
+            <NavLink to={'/profile'} className={activeLink}>
+              Profile
+            </NavLink>
+          </li>
         </ul>
       </nav>
 

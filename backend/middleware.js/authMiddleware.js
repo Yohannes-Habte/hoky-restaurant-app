@@ -56,13 +56,14 @@ export const adminAuth = async (req, res, next) => {
 
     // Find user ID from the database
     const user = await User.findById(decodedToken.id);
-    if (user.isAdmin) {
+    if (user.id && user.isAdmin && user.role === 'admin') {
       next();
     } else {
-      return next(createError(403, 'User is not authorized!'));
+      return next(createError(403, 'User is not authorized as an admin!'));
     }
   } catch (error) {
     console.log(error);
-    next(createError(403, 'User is not authorized!'));
+    res.status(403);
+    throw new Error('User is not authorized!');
   }
 };

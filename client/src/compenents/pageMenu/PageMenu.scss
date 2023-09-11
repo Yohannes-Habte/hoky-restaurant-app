@@ -1,0 +1,35 @@
+@import '../../styles/Variables.scss';
+@import '../../styles/Mixins.scss';
+
+.page-menu {
+  background-color: $navbar-bg3;
+  padding: 1rem;
+
+  .page-list-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    .list-item {
+      .active-link {
+        position: relative;
+        color: #ff6347;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -3px;
+          width: 100%;
+          height: 2px;
+          background-color: $title;
+        }
+      }
+
+      .passive-link {
+        color: #000000;
+      }
+    }
+  }
+}

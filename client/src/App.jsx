@@ -14,6 +14,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserCartContext } from './context/userCart/UserCartProvider';
 import { USER_CART_ACTION } from './context/userCart/UserCartReducer';
+import Profile from './views/ProfilePage/Profile';
 
 const App = () => {
   // Global state variables
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

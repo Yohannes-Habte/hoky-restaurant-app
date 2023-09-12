@@ -30,6 +30,7 @@ export const userAuth = async (req, res, next) => {
      */
 
     if (user.id === req.params.id || user.isAdmin) {
+      req.user = user;
       return next();
     } else {
       return next(createError(403, 'User not found!'));

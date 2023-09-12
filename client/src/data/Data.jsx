@@ -1,5 +1,6 @@
+// Vegan dishes images
 import vegan1 from '../assets/vegan1.jpg';
-import vegan2 from '../assets/vegan2.jpg';
+import vegan2 from '../assets/pizza_4.jpg';
 import vegan3 from '../assets/vegan3.jpg';
 import vegan4 from '../assets/vegan4.jpg';
 import vegan5 from '../assets/vegan5.jpg';
@@ -9,6 +10,31 @@ import vegan8 from '../assets/vegan8.jpg';
 import vegan9 from '../assets/vegan9.jpg';
 import vegan10 from '../assets/vegan10.jpg';
 import vegan11 from '../assets/vegan11.jpg';
+
+// Traditional dishes images
+import traditonal_1 from '../assets/eri_1.jpeg';
+import traditonal_2 from '../assets/eri_2.jpg';
+import traditonal_3 from '../assets/eri_3.jpeg';
+import traditonal_4 from '../assets/eri_4.jpg';
+import traditonal_5 from '../assets/zilzil_1.jpeg';
+import traditonal_6 from '../assets/pizza_2.jpg';
+import traditonal_7 from '../assets/zigni.jpg';
+import traditonal_8 from '../assets/zilzil.jpg';
+
+// Meat dishes images
+import meat_1 from '../assets/fish_1.jpg';
+import meat_2 from '../assets/fish_2.jpg';
+import meat_3 from '../assets/fish_2.jpg';
+import meat_4 from '../assets/fish_4.jpg';
+import meat_5 from '../assets/meat_1.jpg';
+import meat_6 from '../assets/meat_2.jpg';
+import meat_7 from '../assets/pizza_1.jpg';
+import meat_8 from '../assets/pizza_2.jpg';
+import meat_9 from '../assets/pizza_3.jpg';
+import meat_10 from '../assets/pizza_4.jpg';
+import meat_11 from '../assets/pizza_5.jpg';
+
+// Meat dishes images
 
 export const responsive = {
   desktop: {
@@ -28,73 +54,151 @@ export const responsive = {
   },
 };
 
-export const dishData = [
+// Traditional dishes
+export const traditionalDishes = [
   {
     id: 1,
-    imageurl:
-      'https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    imageurl: traditonal_1,
     name: 'Colorful sneakers',
     price: '$19.99',
     description: 'Some text about the product..',
   },
   {
     id: 2,
-    imageurl:
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+    imageurl: traditonal_2,
     name: 'Sport sneakers',
     price: '$21.99',
     description: 'Some text about the product..',
   },
   {
     id: 3,
-    imageurl:
-      'https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    imageurl: traditonal_3,
     name: 'iWatch',
-    price: '$99.99',
+    price: '$19.99',
     description: 'Some text about the product..',
   },
   {
     id: 4,
-    imageurl:
-      'https://images.unsplash.com/photo-1610824352934-c10d87b700cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    imageurl: traditonal_4,
     name: 'Water Bottle',
     price: '$14.99',
     description: 'Some text about the product..',
   },
   {
     id: 5,
-    imageurl:
-      'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzB8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    imageurl: traditonal_5,
+    name: 'Vans sneakers',
+    price: '$23.99',
+    description: 'Some text about the product..',
+  },
+  {
+    id: 6,
+    imageurl: traditonal_6,
+    name: 'Coco Noir',
+    price: '$19.99',
+    description: 'Some text about the product..',
+  },
+  {
+    id: 7,
+    imageurl: traditonal_7,
+    name: 'Sunglasses',
+    price: '$18.99',
+    description: 'Some text about the product..',
+  },
+  {
+    id: 8,
+    imageurl: traditonal_8,
+    name: 'Dove cream',
+    price: '$19.99',
+    description: 'Some text about the product..',
+  },
+];
+
+// Meat Dishes
+
+export const meatDishesData = [
+  {
+    id: 1,
+    imageurl: meat_1,
+    name: 'Colorful sneakers',
+    price: '$19.99',
+    description: 'Some text about the product..',
+  },
+  {
+    id: 2,
+    imageurl: meat_2,
+    name: 'Sport sneakers',
+    price: '$21.99',
+    description: 'Some text about the product..',
+  },
+  {
+    id: 3,
+    imageurl: meat_3,
+    name: 'iWatch',
+    price: '$99.99',
+    description: 'Some text about the product..',
+  },
+  {
+    id: 4,
+    imageurl: meat_4,
+    name: 'Water Bottle',
+    price: '$14.99',
+    description: 'Some text about the product..',
+  },
+  {
+    id: 5,
+    imageurl: meat_5,
     name: 'Vans sneakers',
     price: '$38.99',
     description: 'Some text about the product..',
   },
   {
     id: 6,
-    imageurl:
-      'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzV8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    imageurl: meat_6,
     name: 'Coco Noir',
     price: '$149.99',
     description: 'Some text about the product..',
   },
   {
     id: 7,
-    imageurl:
-      'https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTJ8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    imageurl: meat_7,
     name: 'Sunglasses',
     price: '$38.99',
     description: 'Some text about the product..',
   },
   {
     id: 8,
-    imageurl:
-      'https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    imageurl: meat_8,
+    name: 'Dove cream',
+    price: '$49.99',
+    description: 'Some text about the product..',
+  },
+
+  {
+    id: 9,
+    imageurl: meat_9,
+    name: 'Sunglasses',
+    price: '$38.99',
+    description: 'Some text about the product..',
+  },
+  {
+    id: 10,
+    imageurl: meat_10,
+    name: 'Dove cream',
+    price: '$49.99',
+    description: 'Some text about the product..',
+  },
+
+  {
+    id: 11,
+    imageurl: meat_11,
     name: 'Dove cream',
     price: '$49.99',
     description: 'Some text about the product..',
   },
 ];
 
+// Vegan Dishes
 export const VeganMeals = [
   {
     id: 1,

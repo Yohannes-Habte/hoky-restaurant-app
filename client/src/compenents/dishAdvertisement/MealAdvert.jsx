@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import './Slider.scss';
+import './MealAdvert.scss';
 import { FiArrowLeftCircle, FiArrowRightCircle } from 'react-icons/fi';
-import { sliderData } from './SliderData';
+import { MealData } from './MealsData';
 import { useNavigate } from 'react-router-dom';
 
-const Slider = () => {
+const MealAdvert = () => {
   const navigate = useNavigate();
   // local state variables
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Slide length
-  const slideLength = sliderData.length;
+  const slideLength = MealData.length;
   const autoScroll = true;
   let slideInterval;
   const intervalTime = 5000;
@@ -43,11 +43,11 @@ const Slider = () => {
 
   return (
     <div className="slider">
-      <FiArrowLeftCircle className='arrow prev' onClick={previousSlide} />
+      <FiArrowLeftCircle className="arrow prev" onClick={previousSlide} />
 
-      <FiArrowRightCircle className='arrow next' onClick={nextSlide} />
+      <FiArrowRightCircle className="arrow next" onClick={nextSlide} />
 
-      {sliderData.map((slider, index) => {
+      {MealData.map((slider, index) => {
         const { image, heading, desc } = slider;
         return (
           <div
@@ -81,4 +81,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default MealAdvert;

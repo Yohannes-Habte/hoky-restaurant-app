@@ -1,6 +1,7 @@
 import Meal from '../models/mealModel.js';
 import createError from 'http-errors';
 import User from '../models/userModel.js';
+import mongoose from 'mongoose';
 
 // Post new meals
 export const createMeal = async (req, res, next) => {
@@ -143,11 +144,12 @@ export const updateMeal = async (req, res, next) => {
 };
 
 // ==================================================================================
-// Review specific Meal
+// Rating a specific Meal by the customer
 // ==================================================================================
 export const reviewMeal = async (req, res, next) => {
   const { star, review, reviewDate } = req.body;
   const { id } = req.params;
+
   try {
     // Validation
     if (star < 1 || !review) {
@@ -157,25 +159,25 @@ export const reviewMeal = async (req, res, next) => {
 
     const meal = await Meal.findById(id);
 
-    // If product is not found, ...
+    // If meal is not found, ...
     if (!meal) {
       res.status(404);
-      throw new Error('Product not found. Please try again!');
+      throw new Error('Meal not found. Please try again!');
     }
 
-    // Update rating
+    // Update rating for the found meal
     meal.ratings.push({
       star,
       review,
-      nane: req.body.firstName, // who reviewed the meal
-      //  userId: req.user._id, // Reviewer ID
+      nane: `${req.user.firstName} ${req.user.lastName}`, // who reviewed the meal
+      userId: req.user._id, // Reviewer ID
     });
 
-    // Save the updated meal
+    // Save the rated meal in the database under ratings
     meal.save();
 
     // Send
-    res.status(200).json({ message: 'Product review added!' });
+    res.status(200).json({ message: 'Meal review added!' });
   } catch (error) {
     console.log(error);
     next(createError(500, 'Meal could not be reviewed. Please try again!'));
@@ -183,32 +185,107 @@ export const reviewMeal = async (req, res, next) => {
 };
 
 // ==================================================================================
-// Delete rating by the rater only
+// Delete the meal rating by a specific user
 // ==================================================================================
 
 export const deleteReview = async (req, res, next) => {
+  // Get user ID from the frontend
   const { userId } = req.body;
   try {
     const meal = await Meal.findById(req.params.id);
 
-    // If product is not found, ...
+    // If meal is not found, ...
     if (!meal) {
       res.status(404);
       throw new Error('Meal not found. Please try again!');
     }
 
     // Get all the ratings except with this userId ratings
-    const newRatings = meal.ratings.filter((rating) => {
+    const userRatings = meal.ratings.filter((rating) => {
       return rating.userId.toString() !== userId.toString();
     });
 
-    meal.ratings = newRatings;
-    meal.save()
+    meal.ratings = userRatings;
+
+    // Save the review of the meal after deleting rated by a specific user
+    meal.save();
 
     // Send
-    res.status(200).json({ message: 'Meal review added!' });
+    res.status(200).json({
+      message: ` ${meal.name} meal review has been successfully deleted!`,
+    });
   } catch (error) {
     console.log(error);
-    next(createError(500, 'Meal could not be reviewed. Please try again!'));
+    next(
+      createError(
+        500,
+        'The reviewed meal could not be deleted. Please try again!'
+      )
+    );
+  }
+};
+
+// ==================================================================================
+// Update the review for a meal
+// ==================================================================================
+
+export const updateReview = async (req, res, next) => {
+  const { star, review, userId } = req.body;
+  const { id } = req.params;
+
+  // Validation
+  if (star < 1 || !review) {
+    res.status(404);
+    throw new Error('Please add star and review!');
+  }
+
+  try {
+    const meal = await Meal.findById(id);
+
+    // If meal is not found, ...
+    if (!meal) {
+      res.status(400);
+      throw new Error('Meal not found. Please try again!');
+    }
+
+    // Match user in the database to reviewer in the frontend
+    if (req.user._id.toString() !== userId) {
+      res.status(401);
+      throw new Error('User not authorized. Please try again!');
+    }
+
+    // If the user and reviewer matches, update the meal rating
+    const updatedReview = await Meal.findOneAndUpdate(
+      {
+        _id: meal._id,
+        'ratings.userId': req.user._id,
+      },
+      {
+        $set: {
+          'ratings.$.star': star,
+          'ratings.$.review': review,
+        },
+      },
+      { new: true, runValidators: true }
+    );
+
+    // Send
+    if (updatedReview) {
+      res.status(200).json({
+        message: ` The meal review has been successfully updated!`,
+      });
+    } else {
+      res.status(400).json({
+        message: ` The meal review has not been updated. Please try again!`,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next(
+      createError(
+        500,
+        'The reviewed meal could not be deleted. Please try again!'
+      )
+    );
   }
 };

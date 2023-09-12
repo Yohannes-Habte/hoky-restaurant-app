@@ -1,10 +1,8 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
 import { responsive } from '../../data/Data';
 
-//& Step 1: Import Carousel, CSS and Reponsive.The dishes = availableDishes in Home.jsx
-const MealsCarousel = ({ dishes }) => {
+const MeatDishes = ({ dishes }) => {
   return (
     <div>
       <Carousel
@@ -23,4 +21,4 @@ const MealsCarousel = ({ dishes }) => {
   );
 };
 
-export default MealsCarousel;
+export default MeatDishes;

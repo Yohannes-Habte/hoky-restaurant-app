@@ -11,11 +11,7 @@ import PageMenu from '../../compenents/pageMenu/PageMenu';
 import axios from 'axios';
 import { USER_CART_ACTION } from '../../context/userCart/UserCartReducer';
 import { toast } from 'react-toastify';
-
-// Cloudnary
-const cloud_name = process.env.REACT_APP_CLOUD_NAME;
-const upload_preset = process.env.REACT_APP_UPLOAD_PRESET;
-const cloud_URL = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
+import { cloud_URL, cloud_name, upload_preset } from '../../utiles/Utiles';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -94,8 +90,8 @@ const Profile = () => {
       dispatch({ type: USER_CART_ACTION.UPDATE_USER_DATA, payload: data });
       localStorage.setItem('user', JSON.stringify(data));
 
-      // Reset 
-      setImagePreview(null)
+      // Reset
+      setImagePreview(null);
     } catch (error) {
       console.log(error);
       toast.error(error.message);

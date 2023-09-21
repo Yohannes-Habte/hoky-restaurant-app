@@ -34,6 +34,11 @@ import meat_9 from '../assets/pizza_3.jpg';
 import meat_10 from '../assets/pizza_4.jpg';
 import meat_11 from '../assets/pizza_5.jpg';
 
+// Dish with variety of stews
+import varietyDishes from '../assets/dishes.jpg';
+import mixedDishe from '../assets/mixed_1.jpg';
+import restaurantLocation from '../assets/restaurant.jpeg';
+
 // Meat dishes images
 
 export const responsive = {
@@ -274,5 +279,36 @@ export const VeganMeals = [
     name: 'Rice',
     price: '$21.99',
     description: 'Some text about the product..',
+  },
+];
+
+// About Page
+export const aboutHoky = [
+  {
+    _id: 1,
+    title: `About Hoky Restaurant`,
+    paragraph1: `The restaurant belongs to two friends who have gained a lot of experience in the catering industry. After completing her studies, one worked as a lecturer at the University of Hamburg, while the other worked in the administration of a restaurant chain. However, their love for cooking led the two of them into a different career direction and back together again. They now own several restaurants in Hamburg. Hoky contains a new culinary concept that is still unknown to most: "African dishes with European cooking techniques".`,
+    paragraph2: `Our mission is to create a welcoming atmosphere where absolute guest satisfaction is our top priority through the consistent provision of outstanding food with fresh ingredients and use the power of an open heart to lovingly serve our customers, staff, community and the earth.`,
+    image: varietyDishes,
+  },
+
+  {
+    _id: 2,
+    title: `Hoky Restaurant Menu`,
+    paragraph1:
+      'Our goal at Hoky Restaurant is to create our Eritrean and Ethiopian dishes in a perfect and unique way. We are inspired by different European cooking techniques. Enjoy them now at Hoky, we look forward to seeing you and hearing your opinion about our dishes.',
+
+    paragraph2:
+      'We always offer two separate menus: for vegetarians and non-vegetarians, because we really want to cook our creations for all of you!',
+
+    image: mixedDishe,
+  },
+
+  {
+    _id: 3,
+    title: `Hoky Restaurant Location`,
+    paragraph1: `We have paid attention to every detail in our restaurant to make you feel like you are coming home. That feeling you get when you've been away for a few days and then relax at home on the sofa with what you love and feel good.`,
+    paragraph2: `Visit us today in the heart of Hamburg, just a stone's throw from the new Hamburg central station. We look forward to welcoming you to our restaurant and providing you with unforgettable culinary delights. Reserve the table now and experience an unforgettable culinary journey.`,
+    image: restaurantLocation,
   },
 ];

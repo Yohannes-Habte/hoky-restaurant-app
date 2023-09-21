@@ -15,6 +15,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { UserCartContext } from './context/userCart/UserCartProvider';
 import { USER_CART_ACTION } from './context/userCart/UserCartReducer';
 import Profile from './views/ProfilePage/Profile';
+import Reservation from './views/reservation Page/Reservation';
+import Menu from './views/menuPage/Menu';
 
 const App = () => {
   // Global state variables
@@ -47,7 +49,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/meals" element={<Meals />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/Gallery" element={<Meals />} />
+          <Route path="/reservation" element={<Reservation />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

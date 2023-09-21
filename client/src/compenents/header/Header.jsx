@@ -118,8 +118,20 @@ const Header = () => {
           </li>
 
           <li onClick={hideMenu} className="navbar-item">
-            <NavLink to={'/meals'} className={activeLink}>
-              Meals
+            <NavLink to={'/menu'} className={activeLink}>
+            Menu
+            </NavLink>
+          </li>
+
+          <li onClick={hideMenu} className="navbar-item">
+            <NavLink to={'/gallery'} className={activeLink}>
+            Gallery
+            </NavLink>
+          </li>
+
+          <li onClick={hideMenu} className="navbar-item">
+            <NavLink to={'/reservation'} className={activeLink}>
+            Reservation
             </NavLink>
           </li>
 

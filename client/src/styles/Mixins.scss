@@ -221,3 +221,9 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin paragraph {
+  font-size: $afs;
+  line-height: 2rem;
+  padding: $textPadding;
+}

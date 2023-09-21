@@ -5,14 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import UserCartProvider from './context/userCart/UserCartProvider';
 import { HelmetProvider } from 'react-helmet-async';
+import ReservationProvider from './context/reservation/ReservationProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <UserCartProvider>
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
+      <ReservationProvider>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </ReservationProvider>
     </UserCartProvider>
   </React.StrictMode>
 );

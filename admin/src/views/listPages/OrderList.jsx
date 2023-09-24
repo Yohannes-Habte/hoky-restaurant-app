@@ -1,10 +1,10 @@
 import React from 'react';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
-import MenuDataTable from '../../components/tables/dataGridTables/MenuDataTable';
+import OrdersDataTable from '../../components/tables/dataGridTables/OrdersDataTable';
 import './List.scss';
 
-const MenuList = () => {
+const OrderList = () => {
   return (
     <main className="list-page">
       {/* Navbar component */}
@@ -13,20 +13,20 @@ const MenuList = () => {
       <div className="list-container">
         <Sidebar />
         <section className="table-list-container">
-          <h1 className="title">Menu Information</h1>
+          <h1 className="title">Order Information</h1>
 
           {/* List Infos */}
           <article className="add-to-list">
-            <h3 className="subTitle"> List of Menu </h3>
-            <button className="add-btn">Add Menu</button>
+            <h3 className="subTitle"> List of Orders </h3>
+            <button className="add-btn">Add Order</button>
           </article>
 
-          {/* Menu data table component */}
-          <MenuDataTable />
+          {/* Order data table component */}
+          <OrdersDataTable />
         </section>
       </div>
     </main>
   );
 };
 
-export default MenuList;
+export default OrderList;

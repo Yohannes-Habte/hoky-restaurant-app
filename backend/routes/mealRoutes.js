@@ -15,7 +15,7 @@ import { adminAuth, userAuth } from '../middleware.js/authMiddleware.js';
 const mealRouter = express.Router();
 
 // Meal Routes
-mealRouter.post('/createMeal', adminAuth, createMeal);
+mealRouter.post('/new-meal', adminAuth, createMeal);
 mealRouter.get('/', getAllMeals);
 mealRouter.get('/:id', adminAuth, getSingleMeal);
 mealRouter.get('/count/meals');

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 
-const UserDataTable = () => {
+const ReservationDataTable = () => {
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'firstName', headerName: 'First name', width: 130 },
@@ -115,4 +115,4 @@ const UserDataTable = () => {
   );
 };
 
-export default UserDataTable;
+export default ReservationDataTable

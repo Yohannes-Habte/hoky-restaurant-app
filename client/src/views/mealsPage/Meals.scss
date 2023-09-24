@@ -1,0 +1,39 @@
+@import '../../styles/Variables.scss';
+@import '../../styles/Mixins.scss';
+
+.meals-page {
+  .meals-container {
+    width: $laptop;
+    margin: 1rem auto;
+    .title {
+      @include title;
+    }
+
+    .paragraph {
+      @include paragraph;
+    }
+
+    .meals {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 2rem;
+      row-gap: 2rem;
+
+      .image-conatiner {
+        border: 1px solid $title;
+
+        .image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: $radius;
+          transition: ease 1s;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+}

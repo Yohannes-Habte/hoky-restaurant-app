@@ -1,16 +1,41 @@
-import React from 'react'
-import "./Meals.scss"
-import { Helmet } from 'react-helmet-async'
+import React from 'react';
+import './Meals.scss';
+import { Helmet } from 'react-helmet-async';
+import Fetch from '../../globalFunction/GlobalFunction';
 
 const Meals = () => {
+  const { data, loading, error } = Fetch('/api/meals');
   return (
-    <main>
-        <Helmet>
+    <main className="meals-page">
+      <Helmet>
         <title> Meals </title>
       </Helmet>
-        <h1>Meals Page</h1>
-    </main>
-  )
-}
 
-export default Meals
+      <section className="meals-container">
+        <h1 className="title"> Eritrean and Ethiopian Foods</h1>
+        <p className="paragraph">
+          Eritrean and Ethiopian exciting dishes and exotic recipes from the
+          horn of Africa are the order of the day for us. If you don't try our
+          in-house recipes, sauces and drinks , you're missing out on a real
+          culinary delight! Of course, the classics of Vietnamese cuisine such
+          as pho soups and rice noodles, crispy spring rolls and wok dishes with
+          exotic, hot spices can also be found on our menu - of course also as
+          vegetarian or vegan . Get an insight into our charming restaurant and
+          join us on a culinary journey of discovery to the Far East!
+        </p>
+
+        <div className="meals">
+          {data.map((meal) => {
+            return (
+              <figure className="image-conatiner">
+                <img className="image" src={meal.image} alt={meal.name} />
+              </figure>
+            );
+          })}
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default Meals;

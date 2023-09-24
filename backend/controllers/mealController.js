@@ -9,11 +9,11 @@ export const createMeal = async (req, res, next) => {
   const {
     name,
     category,
-    quantity,
     price,
     discountedPrice,
     description,
-    photos,
+    image,
+    quantity,
     featured,
     ratings,
   } = req.body;
@@ -27,7 +27,7 @@ export const createMeal = async (req, res, next) => {
       !price ||
       !discountedPrice ||
       !description ||
-      !photos ||
+      !image ||
       !featured
     ) {
       res.status(404);
@@ -42,7 +42,7 @@ export const createMeal = async (req, res, next) => {
       price: price,
       discountedPrice: discountedPrice,
       description: description,
-      photos: photos,
+      image: image,
       featured: featured,
       ratings: ratings,
     });

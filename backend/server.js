@@ -13,6 +13,7 @@ import reservationRouter from './routes/reservationRoutes.js';
 import paymentRouter from './routes/paymentRoutes.js';
 import commentRouter from './routes/commentRoutes.js';
 import globalErrorHandler from './middleware.js/globalErrorHandler.js';
+import formRouter from './routes/formRoutes.js';
 
 
 // Express app
@@ -51,6 +52,7 @@ app.use('/api/meals', mealRouter);
 app.use('/api/reservations', reservationRouter);
 app.use('/api/payments', paymentRouter);
 app.use('/api/comments', commentRouter);
+app.use('/api/forms', formRouter);
 
 // Static assets
 app.use(express.static('assets'));

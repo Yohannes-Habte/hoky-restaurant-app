@@ -1,0 +1,83 @@
+@import '../../styles/Variables.scss';
+@import '../../styles/Mixins.scss';
+
+.sidebar {
+  width: 14%;
+  background-color: $sidebar-bg;
+  padding: 0.5rem 1rem;
+
+  .subTitle {
+    @include subTitle;
+    padding-left: 0;
+    margin-bottom: 1rem;
+    text-decoration: underline;
+  }
+  // Items styling
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+
+    .title {
+      text-transform: uppercase;
+      font-size: $sfs;
+      font-weight: $sfw;
+    }
+
+    .link-list-item {
+      display: flex;
+      flex-direction: row;
+
+      padding: 0.2rem 0;
+
+      .icon {
+        margin-right: 0.2rem;
+      }
+
+      .item {
+      }
+
+      &:hover {
+        background-color: $hover-sidebar;
+        color: $red;
+      }
+    }
+  }
+
+  // Background Color
+  .backgroung-color {
+    .bg-title {
+      text-transform: uppercase;
+      text-transform: uppercase;
+      font-size: $sfs;
+      font-weight: $sfw;
+    }
+
+    .color-options {
+      display: flex;
+      align-items: center;
+      margin: 1rem;
+      gap: 1rem;
+      .color-option {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: $radius;
+        border: 1px solid purple;
+        cursor: pointer;
+
+        &:nth-child(1) {
+          background-color: #f0f8ff;
+        }
+
+        &:nth-child(2) {
+          background-color: gray;
+        }
+
+        &:nth-child(3) {
+          background-color: #000000;
+        }
+      }
+    }
+  }
+}

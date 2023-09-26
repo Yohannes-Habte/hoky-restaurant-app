@@ -6,12 +6,13 @@ import axios from 'axios';
 
 // Table header
 const columns = [
+  { field: '_id', headerName: 'Reservation ID', width: 250 },
   { field: 'firstName', headerName: 'First name', width: 130 },
   { field: 'lastName', headerName: 'Last name', width: 130 },
   { field: 'email', headerName: 'Email Addres', width: 130 },
-  { field: 'phone', headerName: 'Phone Number', width: 150 },
-  { field: 'date', headerName: 'Date', width: 150 },
-  { field: 'time', headerName: 'Time', width: 100 },
+  { field: 'phone', headerName: 'Phone Number', width: 130 },
+  { field: 'date', headerName: 'Date', width: 130 },
+  { field: 'time', headerName: 'Time', width: 70 },
   {
     field: 'persons',
     headerName: 'Persons',
@@ -32,7 +33,6 @@ const ReservationDataTable = () => {
           `http://localhost:5000/api/reservations`
         );
         setData(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }

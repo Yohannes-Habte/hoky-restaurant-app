@@ -48,18 +48,8 @@ const Fetch = (url) => {
     setLoading(false);
   };
 
-  // Function to post
-  const postData = async (postingData) => {
-    setLoading(true);
-    try {
-      await axios.post(process.env.REACT_APP_BACKEND_URL + url, postingData);
-    } catch (error) {
-      setError(error);
-    }
-    setLoading(false);
-  };
 
-  return { data, loading, error, reFetch, deleteData, postData };
+  return { data, loading, error, reFetch, deleteData };
 };
 
 export default Fetch;

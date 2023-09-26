@@ -5,14 +5,14 @@ import { FaCloudUploadAlt } from 'react-icons/fa';
 const AddMeal = ({ setOpen }) => {
   // Local State Variables
   const [image, setImage] = useState(null);
-  const [imagePreview, setMealPreview] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [inputs, setInputs] = useState([]);
   const [mealInfo, setMealInfo] = useState({});
 
   // Handle image change
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
-    setMealPreview(URL.createObjectURL(e.target.files[0]));
+    setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
   // Handle input change
@@ -57,9 +57,8 @@ const AddMeal = ({ setOpen }) => {
           mealImage
         );
         const { url } = response.data;
-        console.log(response);
 
-        // New Meal
+        // New Meal body
         const newMeal = {
           name: mealInfo.name,
           price: mealInfo.price,
@@ -96,6 +95,7 @@ const AddMeal = ({ setOpen }) => {
         </span>
         <h3 className="title"> Add New User </h3>
         <section className="imagePreview-form-container">
+
           {/* Meal Form */}
           <form onSubmit={handleSubmit} action="" className="form">
             {/* Image input */}

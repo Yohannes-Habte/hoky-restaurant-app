@@ -31,59 +31,29 @@ export const sidebarMenu = [
         itemName: 'Meals',
         url: '/meals',
       },
+
       {
         _id: 3,
-        itemName: 'Menu',
-        url: '/menu',
-      },
-      {
-        _id: 4,
         itemName: 'Reservations',
         url: '/reservations',
       },
       {
-        _id: 5,
+        _id: 4,
         itemName: 'Orders',
         url: '/orders',
       },
-    ],
-  },
-  {
-    _id: 3,
-    title: 'general',
-    listItems: [
+
       {
-        _id: 1,
-        itemName: 'Press',
-        url: '/presses',
-      },
-      {
-        _id: 2,
+        _id: 5,
         itemName: 'Comments',
         url: '/comments',
       },
     ],
   },
+
   {
     _id: 4,
     title: 'Maintenance',
-    listItems: [
-      {
-        _id: 1,
-        itemName: 'Settings',
-        url: '/settings',
-      },
-      {
-        _id: 2,
-        itemName: 'Backups',
-        url: '/backups',
-      },
-    ],
-  },
-
-  {
-    _id: 5,
-    title: 'Background Color',
     listItems: [
       {
         _id: 1,

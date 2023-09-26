@@ -7,9 +7,6 @@ import { FaCloudUploadAlt, FaTwitterSquare, FaUserAlt } from 'react-icons/fa';
 import { BiSolidMessageDetail } from 'react-icons/bi';
 import './Contact.scss';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { cloud_URL, cloud_name, upload_preset } from '../../utiles/Utiles';
 import Fetch from '../../globalFunction/GlobalFunction';
 
 // Initial State
@@ -17,21 +14,17 @@ const initialSate = {
   firstName: '',
   lastName: '',
   email: '',
-  image: '',
   message: '',
 };
 
 const Contact = () => {
-  // Comment Id
-  const params = useLocation();
-  console.log('Comment Id will be', params);
-  // Local State variables
+  // Local state variables
   const [testimonies, setTestimonies] = useState(initialSate);
-  const [testimonyImage, setProfileImage] = useState(null);
+  const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
   // Distructure the initial values
-  const { firstName, lastName, email, image, message } = testimonies;
+  const { firstName, lastName, email, message } = testimonies;
 
   // Function that handle input change
   const handleInputChange = (event) => {
@@ -41,64 +34,13 @@ const Contact = () => {
 
   // Handle image change
   const handleImageChange = (e) => {
-    setProfileImage(e.target.files[0]);
+    setImage(e.target.files[0]);
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
-  const saveImage = async (event) => {
-    event.preventDefault();
-
-    let imageURL;
-    try {
-      if (
-        testimonyImage !== null &&
-        (testimonyImage.type === 'image/jpeg' ||
-          testimonyImage.type === 'image/jpg' ||
-          testimonyImage.type === 'image/png')
-      ) {
-        const userImage = new FormData();
-        userImage.append('file', testimonyImage);
-        userImage.append('cloud_name', cloud_name);
-        userImage.append('upload_preset', upload_preset);
-
-        // Save image to cloudinary
-        const response = await fetch(cloud_URL, {
-          method: 'POST',
-          body: userImage,
-        });
-        const imgData = await response.json();
-        imageURL = imgData.url.toString();
-      }
-
-      // Save image to mongoDB
-      const photo = {
-        image: testimonyImage ? imageURL : testimonies.image,
-      };
-      const { data } = await axios.post(
-        process.env.REACT_APP_BACKEND_URL + '/api/comments',
-        photo,
-        { withCredentials: true }
-      );
-
-      localStorage.setItem('user', JSON.stringify(data));
-
-      // Reset
-      setImagePreview(null);
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
-    }
-  };
-
-  // Display comment in the frontend using the global function (useEffect)
-  // Global variables and function
-  const { data, loading, error } = Fetch('/api/comments');
-
-  // Function to submit user testimonial or comment
-  // Global state variables and functions
-  const { postData } = Fetch('/api/comments/new-comment');
-  const submitTestimonial = async (event) => {
-    event.preventDefault();
+  // Submit user testimonial or comment
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
       // new comment
@@ -109,9 +51,16 @@ const Contact = () => {
         message: message,
       };
 
-      postData(newComment);
+      const { data } = await axios.post(
+        process.env.REACT_APP_BACKEND_URL + '/api/comments/new-comment',
+        newComment,
+        { withCredentials: true }
+      );
+
+      // Reset
+      e.target.reset();
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
 
@@ -121,7 +70,6 @@ const Contact = () => {
       await axios.delete(
         process.env.REACT_APP_BACKEND_URL + `/api/comments/${id}`
       );
-      // setComments(comments.filter((comment) => comment._id !== id));
     } catch (error) {
       console.log(error);
     }
@@ -139,11 +87,7 @@ const Contact = () => {
           <article className="form-container">
             <h3 className="sub-title"> Drop us a message below </h3>
 
-            <form
-              onSubmit={submitTestimonial}
-              encType="multipart/form-data"
-              className="contact-form"
-            >
+            <form onSubmit={handleSubmit} className="contact-form">
               <div className="user-data">
                 <div className="input-container">
                   <FaUserAlt className="input-icon" />
@@ -290,37 +234,6 @@ const Contact = () => {
               />
             </figure>
           </article>
-        </div>
-      </section>
-
-      {/* Open public comments */}
-      <section className="public-comments">
-        <h2 className="comment-title"> Public Comments</h2>
-
-        <div className="comments">
-          {data.map((comment) => {
-            return (
-              <article key={comment._id} className="single-comment">
-                <div className="photo-container">
-                  <img src={comment.file} alt={comment.nam} className="photo" />
-                </div>
-                <div className="name-email">
-                  <span className="name">
-                    {comment.firstName} {comment.lastName}
-                  </span>
-                  <span className="email">
-                    <a href={`mailto:${comment.email}`}> Send Email </a>
-                  </span>
-                </div>
-                <p className="message"> {comment.message} </p>
-
-                <MdClose
-                  onClick={() => deleteComment(comment._id)}
-                  className="close-icon"
-                />
-              </article>
-            );
-          })}
         </div>
       </section>
     </main>

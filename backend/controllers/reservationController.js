@@ -1,14 +1,24 @@
 import Reservation from '../models/reservationModel.js';
 import User from '../models/userModel.js';
+import createError from 'http-errors';
 
 // Create new Reservation
 export const createReservation = async (req, res, next) => {
   const newReservation = new Reservation(req.body);
+
   try {
-    const saveReservation = await newReservation.save();
-    res.status(201).json(saveReservation);
+    if (newReservation) {
+      const saveReservation = await newReservation.save();
+      res.status(201).json(saveReservation);
+    } else {
+      res.status(400).json({
+        message:
+          'Reservation data from the body is not exist. Please try again!',
+      });
+    }
   } catch (error) {
     console.log(error);
+    next(createError(500, 'Server could not be queried. Please try again!'));
   }
 };
 
@@ -25,13 +35,14 @@ export const getReservation = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
+    next(createError(500, 'Server could not be queried. Please try again!'));
   }
 };
 
 // Get All Reservations
 export const getAllReservations = async (req, res, next) => {
   try {
-    const reservations = await Reservation.find();
+    const reservations = await Reservation.find().sort('createdAt');
     if (reservations) {
       res.status(200).json(reservations);
     } else {
@@ -40,19 +51,19 @@ export const getAllReservations = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
+    next(createError(500, 'Server could not be queried. Please try again!'));
   }
 };
 
 // Delet Single Reservation
 export const deleteReservation = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user._id);
     const reservation = await Reservation.findByIdAndDelete(req.params.id);
 
-    if (user && reservation) {
+    if (reservation) {
       await Reservation.findByIdAndDelete(req.params.id);
       res.status(201).json({
-        message: `${user.firstName} ${user.lastName} reservation  has been successfully deleted!`,
+        message: `Reservation  has been successfully deleted!`,
       });
     } else {
       res.status(400);
@@ -60,5 +71,6 @@ export const deleteReservation = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
+    next(createError(500, 'Server could not be queried. Please try again!'));
   }
 };

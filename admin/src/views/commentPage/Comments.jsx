@@ -1,27 +1,80 @@
 import React from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
-import CommentTable from '../../components/tables/basicTables/CommentTable';
+import './Comments.scss';
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const Comments = () => {
+  // Local state variable
+  const [data, setData] = useState([]);
+
+  // Display comments in the frontend
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`http://localhost:5000/api/comments`);
+        setData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Delete single comment
+  const deleteComment = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/comments/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <main className="list-page">
+    <main className="comment-page">
       {/* Navbar component */}
       <Navbar />
 
-      <div className="list-container">
+      <div className="comment-container">
         <Sidebar />
-        <section className="table-list-container">
-          <h1 className="title">Comment Information</h1>
+        <section className="comments">
+          <h1 className="title">Customers Comments</h1>
 
-          {/* List Infos */}
-          <article className="add-to-list">
-            <h3 className="subTitle"> List of Comments </h3>
-            <button className="add-btn">Add Comment</button>
-          </article>
+          {/* Specific comment */}
+          <div className="wrapper">
+            {data.map((comment) => {
+              return (
+                <article className="comment">
+                  <h3 className="subTitle">
+                    {comment.firstName} {comment.lastName}
+                  </h3>
 
-          {/* Comments data table component */}
-          <CommentTable />
+                  <p className="paragraph">
+                    {comment.message}{' '}
+                    <span className="createdAt">
+                      The message is sent on{' '}
+                      <strong className="date">{comment.createdAt}</strong>
+                    </span>
+                  </p>
+
+                  <p className="paragraph">
+                    Please email me to{' '}
+                    <strong className="email">{comment.email}</strong>
+                  </p>
+
+                  {/* Close comment */}
+                  <span
+                    onClick={() => deleteComment(comment._id)}
+                    className="close"
+                  >
+                    X
+                  </span>
+                </article>
+              );
+            })}
+          </div>
         </section>
       </div>
     </main>

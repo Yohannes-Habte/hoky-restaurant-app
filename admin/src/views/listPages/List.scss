@@ -7,14 +7,14 @@
   width: 100%;
 
   .list-container {
-    width:100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 1rem;
     background-color: $main-bg;
 
     .table-list-container {
-      width:100%;
+      width: 100%;
       margin: 1rem auto;
       display: flex;
       flex-direction: column;
@@ -36,6 +36,62 @@
 
         .add-btn {
           @include button;
+        }
+      }
+    }
+  }
+
+  // Remarks from the customers
+  .reservations {
+    margin-top: 1rem;
+    .reservations-title {
+      @include title;
+    }
+
+    .wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1rem;
+      row-gap: 1rem;
+      padding: 1rem;
+
+      .reservation {
+        @include shadow;
+        position: relative;
+
+        .subTitle {
+          @include subTitle;
+        }
+
+        .paragraph {
+          @include paragraph;
+
+          .date {
+            font-size: 1rem;
+            color: $blue;
+            font-weight: $aafw;
+          }
+
+          .email {
+            color: $blue;
+            cursor: pointer;
+
+            &:hover {
+              color: $red;
+              text-decoration: underline;
+            }
+          }
+        }
+
+        .close {
+          position: absolute;
+          top: 0.2rem;
+          right: 0.8rem;
+          cursor: pointer;
+
+          &:hover {
+            color: $red;
+          }
         }
       }
     }

@@ -88,7 +88,7 @@ const Login = () => {
       //& 1. Save user in the local storage
       localStorage.setItem('user', JSON.stringify(data));
       resetVariables();
-      navigate('/meals');
+      navigate('/Gallery');
     } catch (err) {
       console.log(err);
     }

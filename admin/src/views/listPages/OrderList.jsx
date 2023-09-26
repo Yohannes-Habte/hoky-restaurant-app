@@ -18,7 +18,9 @@ const OrderList = () => {
           {/* List Infos */}
           <article className="add-to-list">
             <h3 className="subTitle"> List of Orders </h3>
-            <button className="add-btn">Add Order</button>
+            <button disabled className="add-btn">
+              Add Order
+            </button>
           </article>
 
           {/* Order data table component */}

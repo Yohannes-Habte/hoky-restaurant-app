@@ -9,10 +9,11 @@ import { BsCheck2All } from 'react-icons/bs';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { validateEmail } from '../../utiles/Utiles';
-import { EntirePageLoader, Spinner } from '../../compenents/loader/Loader';
 import { Helmet } from 'react-helmet-async';
 import { UserCartContext } from '../../context/userCart/UserCartProvider';
 import { USER_CART_ACTION } from '../../context/userCart/UserCartReducer';
+import ButtonSpinner from '../../compenents/loader/ButtonSpinner';
+import ErrorMessage from '../../compenents/messages/ErrorMessage';
 
 // Initial State
 const initialSate = {
@@ -27,7 +28,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   // Global state variables
-  const { dispatch } = useContext(UserCartContext);
+  const { dispatch, loading, error } = useContext(UserCartContext);
 
   // Local state variables
   const [formData, setFormData] = useState(initialSate);
@@ -147,6 +148,7 @@ const Register = () => {
       return toast.error('Please enter a valid email!');
     }
 
+    dispatch({ type: USER_CART_ACTION.REGISTER_REQUEST });
     try {
       const userData = {
         firstName: firstName,
@@ -161,12 +163,18 @@ const Register = () => {
         { withCredentials: true }
       );
 
-      dispatch({ type: USER_CART_ACTION.USER_REGISTER, payload: data });
+      dispatch({ type: USER_CART_ACTION.REGISTER_SUCCESS, payload: data });
       localStorage.setItem('user', JSON.stringify(data));
-
       reset();
+      return toast.success(
+        `${firstName}, you have successfuly created an account!`
+      );
     } catch (err) {
-      console.log(err);
+      dispatch({
+        // Error from the backend
+        type: USER_CART_ACTION.REGISTER_FAIL,
+        payload: toast.error(ErrorMessage(err)),
+      });
     }
   };
 
@@ -182,7 +190,6 @@ const Register = () => {
         <title> Create Account </title>
       </Helmet>
 
-      {isLoading && <EntirePageLoader />}
       <section className="register-container">
         <h1 className="title"> Create Account</h1>
         <fieldset className="register-field">
@@ -330,7 +337,9 @@ const Register = () => {
                 </div>
 
                 <button className="register-button">
-                  {isLoading && <Spinner />} Register
+                  {loading && <ButtonSpinner />}
+                  {loading && <span>Loading...</span>}
+                  {!loading && <span>Register</span>}
                 </button>
                 <p className="haveAccount">
                   Already have an account?

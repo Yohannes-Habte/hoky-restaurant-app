@@ -6,7 +6,9 @@ const initialState = {
   user: localStorage.getItem('user')
     ? JSON.parse(localStorage.getItem('user'))
     : null,
+
   isLoggedIn: false,
+
   cart: {
     cartMeals: localStorage.getItem('cartMeals')
       ? JSON.parse(localStorage.getItem('cartMeals'))
@@ -25,6 +27,10 @@ const initialState = {
       ? localStorage.getItem('paymentMethod')
       : '',
   },
+
+  loading: false,
+
+  error: '',
 };
 
 // User and Cart Context
@@ -44,6 +50,8 @@ const UserCartProvider = ({ children }) => {
         cartItems: state.cart.cartItems,
         shippingAddress: state.cart.shippingAddress,
         paymentMethod: state.cart.paymentMethod,
+        loading: state.loading,
+        error: state.error,
       }}
     >
       {children}

@@ -9,26 +9,22 @@ import { AiFillEyeInvisible } from 'react-icons/ai';
 import { HiOutlineEye } from 'react-icons/hi';
 import { toast } from 'react-toastify';
 import { validateEmail } from '../../utiles/Utiles';
-import { EntirePageLoader } from '../../compenents/loader/Loader';
 import { Helmet } from 'react-helmet-async';
 import { UserCartContext } from '../../context/userCart/UserCartProvider';
 import { USER_CART_ACTION } from '../../context/userCart/UserCartReducer';
+import ButtonSpinner from '../../compenents/loader/ButtonSpinner';
+import Swal from 'sweetalert2';
+import ErrorMessage from '../../compenents/messages/ErrorMessage';
 
 const Login = () => {
   const navigate = useNavigate();
   // Global state variables
-  const { dispatch } = useContext(UserCartContext);
+  const { dispatch, loading, error } = useContext(UserCartContext);
   // Local State variables
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  // Additional local state variables
-  const [isLoading, setIsLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [error, setError] = useState('');
 
   // Update input data
   const updateDat = (e) => {
@@ -72,6 +68,8 @@ const Login = () => {
       return toast.error('Please enter a valid email!');
     }
 
+    dispatch({ type: USER_CART_ACTION.LOGIN_REQUEST });
+
     try {
       // The body
       const loginUser = {
@@ -83,15 +81,31 @@ const Login = () => {
         loginUser,
         { withCredentials: true }
       );
-      dispatch({ type: USER_CART_ACTION.USER_SIGNIN, payload: data.details });
+      dispatch({ type: USER_CART_ACTION.LOGIN_SUCCESS, payload: data });
 
       //& 1. Save user in the local storage
       localStorage.setItem('user', JSON.stringify(data));
       resetVariables();
       navigate('/Gallery');
+      return toast.success("You have successfully logged in!")
     } catch (err) {
       console.log(err);
+      dispatch({
+        type: USER_CART_ACTION.LOGIN_FAIL,
+        payload: toast.error(ErrorMessage(err)),
+      });
     }
+  };
+
+  //! handle click for sweetalert2
+  const handleClick = () => {
+    Swal.fire({
+      position: 'top-middle',
+      icon: 'success',
+      title: 'You have been successfully logged in',
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   return (
@@ -100,7 +114,7 @@ const Login = () => {
         <title> Log In </title>
       </Helmet>
 
-      {isLoading && <EntirePageLoader />}
+      {/* {isLoading && <EntirePageLoader />}  */}
       <h1 className="login-title"> Welcome To Your Account </h1>
       <div className="login-container">
         <figure className="login-icon-container">
@@ -157,9 +171,18 @@ const Login = () => {
                 <a href=""> Forget your password? </a>
               </div>
             </div>
-            <button type="submit" className="login-button">
-              Log In
+
+            <button
+              // onClick={handleClick}
+              type="submit"
+              disabled={loading}
+              className="login-button"
+            >
+              {loading && <ButtonSpinner />}
+              {loading && <span>Loading...</span>}
+              {!loading && <span>Log In</span>}
             </button>
+
             <p className="haveNoAccount">
               Don't have an account? <NavLink to="/register">Sign Up</NavLink>
             </p>

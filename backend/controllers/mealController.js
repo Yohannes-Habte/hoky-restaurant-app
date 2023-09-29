@@ -1,7 +1,5 @@
 import Meal from '../models/mealModel.js';
 import createError from 'http-errors';
-import User from '../models/userModel.js';
-import mongoose from 'mongoose';
 
 // Post new meals
 export const createMeal = async (req, res, next) => {
@@ -58,7 +56,11 @@ export const getAllMeals = async (req, res, next) => {
   try {
     const meals = await Meal.find().sort('-createdAt');
 
-    res.status(200).json(meals);
+    if (meals) {
+      res.status(200).json(meals);
+    } else {
+      return next(createError(400, 'Meals not found! Please try again!'));
+    }
   } catch (error) {
     console.log(error);
     next(createError(500, 'Meals could not be accessed. Please try again!'));

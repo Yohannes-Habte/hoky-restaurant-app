@@ -1,11 +1,28 @@
 // Action object
 export const USER_CART_ACTION = {
-  // User
-  USER_REGISTER: 'USER_REGISTER',
-  USER_SIGNIN: 'USER_SIGNIN',
-  UPDATE_USER_DATA: 'UPDATE_USER_DATA',
+  // Creating user account
+  REGISTER_REQUEST: 'REGISTER_REQUEST',
+  REGISTER_SUCCESS: 'REGISTER_SUCCESS',
+  REGISTER_FAIL: 'REGISTER_FAIL',
+
+  // Login user
+  LOGIN_REQUEST: 'LOGIN_REQUEST',
+  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+  LOGIN_FAIL: 'LOGIN_FAIL',
+
+  // Update user data
+  UPDATE_REQUEST: 'UPDATE_REQUEST',
+  UPDATE_SUCCESS: 'UPDATE_SUCCESS',
+  UPDATE_FAIL: 'UPDATE_FAIL',
+
+  // User log in status
   IS_USER_LOGGED_IN: 'IS_USER_LOGGED_IN',
-  USER_LOG_OUT: 'USER_LOG_OUT',
+
+  // User logout
+  LOG_OUT_REQUEST: 'LOG_OUT_REQUEST',
+  LOG_OUT_SUCCESS: 'LOG_OUT_SUCCESS',
+  LOG_OUT_FAIL: 'LOG_OUT_FAIL',
+
   // Cart
   ADD_MEAL_TO_CART: 'ADD_ITEM_TO_CART',
   REMOVE_MEAL_FROM_CART: 'REMOVE_ITEM_FROM_CART',
@@ -19,16 +36,34 @@ const UserCartReducer = (state, action) => {
   switch (action.type) {
     // User status
     // User Create an account
-    case USER_CART_ACTION.USER_REGISTER:
-      return { ...state, user: action.payload };
+    case USER_CART_ACTION.REGISTER_REQUEST:
+      return { ...state, loading: true, error: '' };
 
-    // User Login
-    case USER_CART_ACTION.USER_SIGNIN:
-      return { ...state, user: action.payload };
+    case USER_CART_ACTION.REGISTER_SUCCESS:
+      return { ...state, user: action.payload, loading: false, error: '' };
 
-    // User Login
-    case USER_CART_ACTION.UPDATE_USER_DATA:
-      return { ...state, user: action.payload };
+    case USER_CART_ACTION.REGISTER_FAIL:
+      return { ...state, error: action.payload, loading: false };
+
+    // Login user
+    case USER_CART_ACTION.LOGIN_REQUEST:
+      return { ...state, loading: true, error: '' };
+
+    case USER_CART_ACTION.LOGIN_SUCCESS:
+      return { ...state, user: action.payload, loading: false, error: '' };
+
+    case USER_CART_ACTION.LOGIN_FAIL:
+      return { ...state, error: action.payload, loading: false };
+
+    // Update user data
+    case USER_CART_ACTION.UPDATE_REQUEST:
+      return { ...state, loading: true, error: '' };
+
+    case USER_CART_ACTION.UPDATE_SUCCESS:
+      return { ...state, user: action.payload, loading: false, error: '' };
+
+    case USER_CART_ACTION.UPDATE_FAIL:
+      return { ...state, error: action.payload, loading: false };
 
     // Is User Login In
     case USER_CART_ACTION.IS_USER_LOGGED_IN:

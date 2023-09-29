@@ -18,6 +18,7 @@ import Profile from './views/ProfilePage/Profile';
 import Reservation from './views/reservation Page/Reservation';
 import Menu from './views/menuPage/Menu';
 
+
 const App = () => {
   // Global state variables
   const { dispatch } = useContext(UserCartContext);
@@ -44,7 +45,19 @@ const App = () => {
   return (
     <div>
       <Router>
-        <ToastContainer position="bottom-center" limit={1} />
+        <ToastContainer
+          position="top-right"
+          limit={1}
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

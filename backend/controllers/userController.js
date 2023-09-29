@@ -14,12 +14,6 @@ export const registerUser = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: email });
 
-    // If user already exist exist in the database
-    if (user) {
-      res.status(400);
-      throw new Error('Eail has already been taken. Please try another one!');
-    }
-
     // If user does not exist in the database
     if (!user) {
       const newUser = new User({
@@ -54,8 +48,10 @@ export const registerUser = async (req, res, next) => {
           token: token,
         });
     } else {
-      res.status(400);
-      throw new Error('Invalid user data! Please try again!');
+      // If user already exist exist in the database
+      return next(
+        createError(500, 'Eail has already been taken. Please try another one!')
+      );
     }
   } catch (error) {
     console.log(error);
@@ -73,16 +69,16 @@ export const loginUser = async (req, res, next) => {
 
     // If user does not exist in the database
     if (!user) {
-      res.status(200);
-      throw new Error('This email does not exist. Please sign up!');
+      return next(
+        createError(400, 'This email does not exist. Please sign up!')
+      );
     }
 
     // If user exist, then check user password validity
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      res.status(200);
-      throw new Error('Invalid password!');
+      return next(createError(400, 'Invalid password. Please sign up!'));
     }
 
     // If user exist and password is valid, user will login
@@ -104,8 +100,9 @@ export const loginUser = async (req, res, next) => {
         .status(200)
         .json({ ...otherDetails });
     } else {
-      res.status(400);
-      throw new Error('Invalid email or password! Please check it!');
+      return next(
+        createError(400, 'Invalid email or password! Please check it!')
+      );
     }
   } catch (error) {
     console.log(error);
@@ -201,7 +198,6 @@ export const updateUserPhoto = async (req, res, next) => {
     user.image = image;
     const updatedPhoto = await user.save();
     res.status(200).json(updatedPhoto);
-
   } catch (error) {
     console.log(error);
     return next(

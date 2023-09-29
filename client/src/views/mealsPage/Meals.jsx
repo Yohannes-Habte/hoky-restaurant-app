@@ -2,6 +2,9 @@ import React from 'react';
 import './Meals.scss';
 import { Helmet } from 'react-helmet-async';
 import Fetch from '../../globalFunction/GlobalFunction';
+import PageSpinner from '../../compenents/loader/PageSpinner';
+import ErrorMessage from '../../compenents/messages/ErrorMessage';
+import { toast } from 'react-toastify';
 
 const Meals = () => {
   const { data, loading, error } = Fetch('/api/meals');
@@ -24,15 +27,22 @@ const Meals = () => {
           join us on a culinary journey of discovery to the Far East!
         </p>
 
-        <div className="meals">
-          {data.map((meal) => {
-            return (
-              <figure className="image-conatiner">
-                <img className="image" src={meal.image} alt={meal.name} />
-              </figure>
-            );
-          })}
-        </div>
+        {loading ? (
+          <PageSpinner />
+        ) : error ? (
+          // <MessageBox variant="danger"> {error} </MessageBox>
+          toast.error(ErrorMessage(error))
+        ) : (
+          <div className="meals">
+            {data.map((meal) => {
+              return (
+                <figure className="image-conatiner">
+                  <img className="image" src={meal.image} alt={meal.name} />
+                </figure>
+              );
+            })}
+          </div>
+        )}
       </section>
     </main>
   );

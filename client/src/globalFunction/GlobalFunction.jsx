@@ -42,12 +42,12 @@ const Fetch = (url) => {
     setLoading(true);
     try {
       await axios.delete(process.env.REACT_APP_BACKEND_URL + url);
+      setLoading(false);
     } catch (err) {
       setError(err);
+      setLoading(false);
     }
-    setLoading(false);
   };
-
 
   return { data, loading, error, reFetch, deleteData };
 };

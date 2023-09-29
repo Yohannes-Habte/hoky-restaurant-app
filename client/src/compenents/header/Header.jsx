@@ -27,12 +27,6 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [scrollPage, setScrollPage] = useState(false);
 
-  // Additional local state variables
-  const [isLoading, setIsLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  const [error, setError] = useState('');
-
   // User sign out Function
   const logoutUser = () => {
     dispatch({ type: USER_CART_ACTION.USER_LOG_OUT });
@@ -119,31 +113,25 @@ const Header = () => {
 
           <li onClick={hideMenu} className="navbar-item">
             <NavLink to={'/menu'} className={activeLink}>
-            Menu
+              Menu
             </NavLink>
           </li>
 
           <li onClick={hideMenu} className="navbar-item">
             <NavLink to={'/gallery'} className={activeLink}>
-            Gallery
+              Gallery
             </NavLink>
           </li>
 
           <li onClick={hideMenu} className="navbar-item">
             <NavLink to={'/reservation'} className={activeLink}>
-            Reservation
+              Reservation
             </NavLink>
           </li>
 
           <li onClick={hideMenu} className="navbar-item">
             <NavLink to={'/contact'} className={activeLink}>
               Contact
-            </NavLink>
-          </li>
-
-          <li onClick={hideMenu} className="navbar-item">
-            <NavLink to={'/profile'} className={activeLink}>
-              Profile
             </NavLink>
           </li>
         </ul>
@@ -163,6 +151,9 @@ const Header = () => {
           <ShowOnLoggedIn>
             <NavLink to={'/order-history'} className={activeLink}>
               My Order
+            </NavLink>
+            <NavLink to={'/profile'} className={activeLink}>
+              Profile
             </NavLink>
             <NavLink to={'/logout'} onClick={logout}>
               Logout

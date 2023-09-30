@@ -1,8 +1,10 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
-import { responsive } from '../../data/Data';
+import 'react-multi-carousel/lib/styles.css';
+import { responsive } from '../../../data/Data';
 
-const MeatDishes = ({ dishes }) => {
+//& Step 1: Import Carousel, CSS and Reponsive. Then, export it to Home.jsx
+const EriEthioMeatMeals = ({ meatDishes }) => {
   return (
     <div>
       <Carousel
@@ -10,15 +12,15 @@ const MeatDishes = ({ dishes }) => {
         responsive={responsive}
         infinite={true}
         autoPlay={true}
-        autoPlaySpeed={3000}
+        autoPlaySpeed={2000}
         keyBoardControl={true}
         customTransition="all 500ms ease"
         transitionDuration={1000}
       >
-        {dishes}
+        {meatDishes}
       </Carousel>
     </div>
   );
 };
 
-export default MeatDishes;
+export default EriEthioMeatMeals;

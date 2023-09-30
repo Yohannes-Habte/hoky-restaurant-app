@@ -2,59 +2,73 @@ import React from 'react';
 import './Home.scss';
 import Slider from '../../compenents/dishAdvertisement/MealAdvert';
 import HomeInfoBox from '../../compenents/homeInfo/HomeInfoBox';
-import { VeganMeals, meatDishesData, traditionalDishes } from '../../data/Data';
-import CarouselItem from '../../compenents/carouselItem/CarouselItem';
-import VeganCarousel from '../../compenents/carousel/VeganCarousel';
 import { Helmet } from 'react-helmet-async';
-import TraditionalDishes from '../../compenents/carousel/TraditionalDishes';
-import MeatDishes from '../../compenents/carousel/MeatDishes';
+import CarouselDishItems from '../../compenents/carousel/carouselItem/CarouselDishItems';
+import EriEthioMeatMeals from '../../compenents/carousel/dishes/EriEthioMeatMeals';
+import EriEthioVeganMeals from '../../compenents/carousel/dishes/EriEthioVeganMeals';
+import EriEthioMixedMeals from '../../compenents/carousel/dishes/EriEthioMixedMeals';
+import EastAfricanMeals from '../../compenents/carousel/dishes/EastAfricanMeals';
+import SectionHeader from '../../compenents/sectionHeader/SectionHeader';
+import { eastAfricanDishesData, meatDishesData, mixedDishesData, veganDishesData } from '../../data/Data';
 
+// Page heading component for the Home.jsx
+/** 
 const PageHeading = ({ heading, button }) => {
   return (
-    <React.Fragment>
-      <section className="heading">
-        <h1 className="title"> {heading} </h1>
-        <button className="button"> {button} </button>
-      </section>
-      <div className="horizontal-line"></div>
-    </React.Fragment>
+    <section className="heading">
+      <h1 className="title"> {heading} </h1>
+      <button className="button"> {button} </button>
+    </section>
   );
 };
+*/
 const Home = () => {
-  //& Step 3: Map the dishData from database (dishData)
+  //& Step 3: Map the meals based on category from database
 
-  // Traditional dishes
-  const availableTraditionalDishes = traditionalDishes.map((item, index) => (
-    <div key={index}>
-      <CarouselItem
-        name={item.name}
-        price={item.price}
-        description={item.description}
-        imageurl={item.imageurl}
+  // Eritrean and Ethiopian favourite meat dishes from the backend
+  const eriEthioMeatDishes = meatDishesData.map((dish) => (
+    <div key={dish.id}>
+      <CarouselDishItems
+        name={dish.name}
+        price={dish.price}
+        description={dish.description}
+        imageurl={dish.imageurl}
       />
     </div>
   ));
 
-  // Vegan dishes
-  const vegetarianMeals = VeganMeals.map((item, index) => (
-    <div key={index}>
-      <CarouselItem
-        name={item.name}
-        price={item.price}
-        description={item.description}
-        imageurl={item.imageurl}
+  // Eritrean and Ethiopian favourite Vegan dishes from the backend
+  const eriEthioVeganDishes = veganDishesData.map((dish) => (
+    <div key={dish.id}>
+      <CarouselDishItems
+        name={dish.name}
+        price={dish.price}
+        description={dish.description}
+        imageurl={dish.imageurl}
       />
     </div>
   ));
 
-  // Meat Meals dishes
-  const mixedMeals = meatDishesData.map((item, index) => (
-    <div key={index}>
-      <CarouselItem
-        name={item.name}
-        price={item.price}
-        description={item.description}
-        imageurl={item.imageurl}
+  // Eritrean and Ethiopian favourite Vegan dishes from the backend
+  const eriEthioMixedDishes = mixedDishesData.map((dish) => (
+    <div key={dish.id}>
+      <CarouselDishItems
+        name={dish.name}
+        price={dish.price}
+        description={dish.description}
+        imageurl={dish.imageurl}
+      />
+    </div>
+  ));
+
+  // East African dishes from the backend
+  const eastAfricanDishes = eastAfricanDishesData.map((dish) => (
+    <div key={dish.id}>
+      <CarouselDishItems
+        name={dish.name}
+        price={dish.price}
+        description={dish.description}
+        imageurl={dish.imageurl}
       />
     </div>
   ));
@@ -68,26 +82,46 @@ const Home = () => {
       {/* Dishes Advertisement using slider */}
       <Slider />
 
-      {/* Service Information box */}
-      <HomeInfoBox />
+      <section className="home-container">
+        {/* Service Information box */}
+        <HomeInfoBox />
 
-      {/* Lates Meals */}
-      <section className="container">
-        <PageHeading heading={'Latest Meals'} button={'Buy Now >>'} />
-        {/* //& Step 4: Get dishes from the MealsCarousel*/}
-        <TraditionalDishes dishes={availableTraditionalDishes} />
-      </section>
+        {/* Eri-Ethiopian Favourite Organic Meat Dishes */}
+        <section className="category">
+          <SectionHeader
+            heading={'Eri-Ethiopian Favourite Organic Meat Dishes'}
+            button={'Buy Now >>'}
+          />
+          {/* //& Step 4: Get meat dishes from the EriEthioMeatMeals*/}
+          <EriEthioMeatMeals meatDishes={eriEthioMeatDishes} />
+        </section>
 
-      {/* Meat Dishes */}
-      <section className="categories">
-        <PageHeading heading={'Meat Meals'} button={'Buy Now >>'} />
-        <MeatDishes dishes={mixedMeals} />
-      </section>
+        {/* Eri - Ethiopian Organic Vegetarian Dishes */}
+        <section className="category">
+          <SectionHeader
+            heading={'Eri - Ethiopian Organic Vegan Dishes'}
+            button={'Buy Now >>'}
+          />
+          <EriEthioVeganMeals veganDishes={eriEthioVeganDishes} />
+        </section>
 
-      {/* Vegan Meals */}
-      <section className="container">
-        <PageHeading heading={'Vegan Meals'} button={'Buy Now >>'} />
-        <VeganCarousel veganDishes={vegetarianMeals} />
+        {/* Eri - Ethiopian Organic Mixed Dishes */}
+        <section className="category">
+          <SectionHeader
+            heading={'Eri - Ethiopian Organic Mixed Dishes'}
+            button={'Buy Now >>'}
+          />
+          <EriEthioMixedMeals mixedDishes={eriEthioMixedDishes} />
+        </section>
+
+        {/* East African Popular Dishes */}
+        <section className="category">
+          <SectionHeader
+            heading={'East African Popular Dishes'}
+            button={'Buy Now >>'}
+          />
+          <EastAfricanMeals eastAfricaFavouriteishes={eastAfricanDishes} />
+        </section>
       </section>
     </main>
   );

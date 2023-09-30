@@ -1,9 +1,8 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import { responsive } from '../../data/Data';
+import { responsive } from '../../../data/Data';
 
-const VeganCarousel = ({ veganDishes }) => {
+const EriEthioVeganMeals = ({ veganDishes }) => {
   return (
     <div>
       <Carousel
@@ -22,4 +21,4 @@ const VeganCarousel = ({ veganDishes }) => {
   );
 };
 
-export default VeganCarousel;
+export default EriEthioVeganMeals;

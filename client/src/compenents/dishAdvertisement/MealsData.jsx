@@ -1,73 +1,50 @@
 // Import images
-import zilzil from '../../assets/zilzil.jpg';
-import zigni from '../../assets/zigni.jpg';
-import vegan from '../../assets/vegan.jpg';
-import Eri_2 from '../../assets/eri_2.jpg';
-import Eri_4 from '../../assets/eri_4.jpg';
-import Fish_1 from '../../assets/fish_1.jpg';
-import Fish_3 from '../../assets/fish_3.jpg';
-import Meat_1 from '../../assets/meat_1.jpg';
-import Pizza_5 from '../../assets/pizza_5.jpg';
-import Pizza_4 from '../../assets/pizza_4.jpg';
+import meat_1 from '../../assets/eri-ethio-zilzil.jpeg';
+import meat_2 from '../../assets/eri-ethio-meat2.jpeg';
+import meat_3 from '../../assets/eri-ethio-meat3.jpeg';
+import meat_4 from '../../assets/eri-ethio-meat4.jpeg';
+import meat_5 from '../../assets/eri-ethio-meat5.jpeg';
+import meat_6 from '../../assets/eri-ethio-meat6.jpeg';
+import meat_7 from '../../assets/eri-ethio-meat7.jpeg';
 
-export const MealData = [
+export const advertMeals = [
   {
-    image: zigni,
+    image: meat_1,
     heading: 'Zigni Dish',
     descr: 'Up to 30% off on all onsale products',
   },
   {
-    image: Fish_1,
+    image: meat_2,
     heading: 'Fish Dish',
     descr: 'Up to 30% off on all onsale products',
   },
   {
-    image: vegan,
+    image: meat_3,
     heading: 'Vegan Dish',
     descr: 'Up to 30% off on all onsale products',
   },
 
   {
-    image: zilzil,
+    image: meat_4,
     heading: 'Zilzil Dish',
     descr: 'Up to 30% off on all onsale products',
   },
 
-  
   {
-    image: Pizza_5,
+    image: meat_5,
     heading: 'Delicious Pizza',
     descr: 'Up to 30% off on all onsale products',
   },
 
   {
-    image: Eri_2,
+    image: meat_6,
     heading: 'Shiro Dish',
     descr: 'Up to 30% off on all onsale products',
   },
 
   {
-    image: Eri_4,
+    image: meat_7,
     heading: 'Mixed Dish',
-    descr: 'Up to 30% off on all onsale products',
-  },
-
-  {
-    image: Fish_3,
-    heading: 'Fish Dish',
-    descr: 'Up to 30% off on all onsale products',
-  },
-
-  
-  {
-    image: Meat_1,
-    heading: 'Tibsi Dish',
-    descr: 'Up to 30% off on all onsale products',
-  },
-
-  {
-    image: Pizza_4,
-    heading: 'Vegan Pizza',
     descr: 'Up to 30% off on all onsale products',
   },
 ];

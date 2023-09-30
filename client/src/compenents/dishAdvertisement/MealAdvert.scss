@@ -17,6 +17,16 @@
   opacity: 0;
   transform: translateX(-50%);
   transition: all 0.5s ease;
+
+  .image-container {
+    width: 100%;
+    height: 100%;
+    .image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -173,10 +183,10 @@
   opacity: 1;
 }
 .arrow {
-  border: 2px solid orangered;
+  border: 3px solid $title;
   border-radius: 50%;
-  background: transparent;
-  color: #fff;
+  background: $title;
+  color: #ffffff;
   width: 2.5rem;
   height: 2.5rem;
   cursor: pointer;
@@ -187,16 +197,15 @@
 }
 
 .arrow:hover {
-  background: #fff;
+  background: #ffffff;
+  color: $title;
 }
 
 .next {
   right: 1.5rem;
-  color: rgb(13, 0, 255);
 }
 .prev {
   left: 1.5rem;
-  color: rgb(30, 0, 255);
 }
 
 hr {

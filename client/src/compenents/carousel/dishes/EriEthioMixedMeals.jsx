@@ -1,10 +1,10 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { responsive } from '../../data/Data';
+import { responsive } from '../../../data/Data';
 
-//& Step 1: Import Carousel, CSS and Reponsive.The dishes = availableDishes in Home.jsx
-const TraditionalDishes = ({ dishes }) => {
+//& Step 1: Import Carousel, CSS and Reponsive. Then, export it to Home.jsx
+const EriEthioMixedMeals = ({ mixedDishes }) => {
   return (
     <div>
       <Carousel
@@ -17,10 +17,10 @@ const TraditionalDishes = ({ dishes }) => {
         customTransition="all 500ms ease"
         transitionDuration={1000}
       >
-        {dishes}
+        {mixedDishes}
       </Carousel>
     </div>
   );
 };
 
-export default TraditionalDishes;
+export default EriEthioMixedMeals;

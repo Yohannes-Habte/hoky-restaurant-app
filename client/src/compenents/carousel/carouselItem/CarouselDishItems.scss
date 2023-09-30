@@ -1,0 +1,51 @@
+@import '../../../styles/Variables.scss';
+@import '../../../styles/Mixins.scss';
+
+.carousel-dish-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+.image-container {
+  width: 100%;
+  height: 16rem;
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: $radius;
+  }
+}
+
+.dish-name-price-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+
+  .dish-name {
+    @include subTitle;
+    color: black;
+  }
+
+  .dish-price {
+    color: $title;
+    font-weight: $aafw;
+  }
+}
+
+.paragraph {
+  @include paragraph;
+  color: black;
+  padding-left: 0;
+}
+
+.addToCart-btn {
+  @include button;
+}

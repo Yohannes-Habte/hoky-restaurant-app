@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './MealAdvert.scss';
 import { FiArrowLeftCircle, FiArrowRightCircle } from 'react-icons/fi';
-import { MealData } from './MealsData';
+import { advertMeals } from './MealsData';
 import { useNavigate } from 'react-router-dom';
 
 const MealAdvert = () => {
@@ -10,7 +10,7 @@ const MealAdvert = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Slide length
-  const slideLength = MealData.length;
+  const slideLength = advertMeals.length;
   const autoScroll = true;
   let slideInterval;
   const intervalTime = 5000;
@@ -47,7 +47,7 @@ const MealAdvert = () => {
 
       <FiArrowRightCircle className="arrow next" onClick={nextSlide} />
 
-      {MealData.map((slider, index) => {
+      {advertMeals.map((slider, index) => {
         const { image, heading, desc } = slider;
         return (
           <div
@@ -56,7 +56,9 @@ const MealAdvert = () => {
           >
             {index === currentSlide && (
               <>
-                <img src={image} alt="slide" />
+                <figure className="image-container">
+                  <img className="image" src={image} alt="slide" />
+                </figure>
                 <div className="content">
                   <span className="span1"></span>
                   <span className="span2"></span>

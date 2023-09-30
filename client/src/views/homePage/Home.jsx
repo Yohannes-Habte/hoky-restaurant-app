@@ -9,7 +9,7 @@ import EriEthioVeganMeals from '../../compenents/carousel/dishes/EriEthioVeganMe
 import EriEthioMixedMeals from '../../compenents/carousel/dishes/EriEthioMixedMeals';
 import EastAfricanMeals from '../../compenents/carousel/dishes/EastAfricanMeals';
 import SectionHeader from '../../compenents/sectionHeader/SectionHeader';
-import { eastAfricanDishesData, meatDishesData, mixedDishesData, veganDishesData } from '../../data/Data';
+import Fetch from '../../globalFunction/GlobalFunction';
 
 // Page heading component for the Home.jsx
 /** 
@@ -23,52 +23,66 @@ const PageHeading = ({ heading, button }) => {
 };
 */
 const Home = () => {
+  // Global variables and useEffect functions
+
+  // Meats Category
+  const { data, loading, error } = Fetch('/api/meals/categories/meats');
+
+  // Meats Category
+  const { data: veganData } = Fetch('/api/meals/categories/vegan');
+
+  // Meats Category
+  const { data: mixedMealsData } = Fetch('/api/meals/categories/mixed');
+
+  // Meats Category
+  const { data: eastAfricaDishes } = Fetch(
+    '/api/meals/categories/east-africa-dishes'
+  );
   //& Step 3: Map the meals based on category from database
-
   // Eritrean and Ethiopian favourite meat dishes from the backend
-  const eriEthioMeatDishes = meatDishesData.map((dish) => (
-    <div key={dish.id}>
+  const eriEthioMeatDishes = data.map((dish) => (
+    <div key={dish._id}>
       <CarouselDishItems
         name={dish.name}
         price={dish.price}
         description={dish.description}
-        imageurl={dish.imageurl}
+        imageurl={dish.image}
       />
     </div>
   ));
 
   // Eritrean and Ethiopian favourite Vegan dishes from the backend
-  const eriEthioVeganDishes = veganDishesData.map((dish) => (
-    <div key={dish.id}>
+  const eriEthioVeganDishes = veganData.map((dish) => (
+    <div key={dish._id}>
       <CarouselDishItems
         name={dish.name}
         price={dish.price}
         description={dish.description}
-        imageurl={dish.imageurl}
+        imageurl={dish.image}
       />
     </div>
   ));
 
   // Eritrean and Ethiopian favourite Vegan dishes from the backend
-  const eriEthioMixedDishes = mixedDishesData.map((dish) => (
-    <div key={dish.id}>
+  const eriEthioMixedDishes = mixedMealsData.map((dish) => (
+    <div key={dish._id}>
       <CarouselDishItems
         name={dish.name}
         price={dish.price}
         description={dish.description}
-        imageurl={dish.imageurl}
+        imageurl={dish.image}
       />
     </div>
   ));
 
   // East African dishes from the backend
-  const eastAfricanDishes = eastAfricanDishesData.map((dish) => (
-    <div key={dish.id}>
+  const eastAfricanDishes = eastAfricaDishes.map((dish) => (
+    <div key={dish._id}>
       <CarouselDishItems
         name={dish.name}
         price={dish.price}
         description={dish.description}
-        imageurl={dish.imageurl}
+        imageurl={dish.image}
       />
     </div>
   ));

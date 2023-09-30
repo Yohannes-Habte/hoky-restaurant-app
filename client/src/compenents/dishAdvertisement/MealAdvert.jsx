@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import './MealAdvert.scss';
 import { FiArrowLeftCircle, FiArrowRightCircle } from 'react-icons/fi';
-import { advertMeals } from './MealsData';
 import { useNavigate } from 'react-router-dom';
+import Fetch from '../../globalFunction/GlobalFunction';
 
 const MealAdvert = () => {
+  // Navigate to ....
   const navigate = useNavigate();
+
+  // Global variables and useEffect functions
+
+  // Meats Category
+  const { data, loading, error } = Fetch('/api/meals');
   // local state variables
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Slide length
-  const slideLength = advertMeals.length;
+  const slideLength = data.length;
   const autoScroll = true;
   let slideInterval;
   const intervalTime = 5000;
@@ -47,8 +53,8 @@ const MealAdvert = () => {
 
       <FiArrowRightCircle className="arrow next" onClick={nextSlide} />
 
-      {advertMeals.map((slider, index) => {
-        const { image, heading, desc } = slider;
+      {data.map((slider, index) => {
+        const { image, name } = slider;
         return (
           <div
             key={index}
@@ -64,8 +70,7 @@ const MealAdvert = () => {
                   <span className="span2"></span>
                   <span className="span3"></span>
                   <span className="span4"></span>
-                  <h2> {heading} </h2>
-                  <p> {desc} </p>
+                  <h2> {name} </h2>
                   <hr />
                   <button
                     className="btn btn-primary"

@@ -51,22 +51,6 @@ export const createMeal = async (req, res, next) => {
   }
 };
 
-// Get all meals
-export const getAllMeals = async (req, res, next) => {
-  try {
-    const meals = await Meal.find().sort('-createdAt');
-
-    if (meals) {
-      res.status(200).json(meals);
-    } else {
-      return next(createError(400, 'Meals not found! Please try again!'));
-    }
-  } catch (error) {
-    console.log(error);
-    next(createError(500, 'Meals could not be accessed. Please try again!'));
-  }
-};
-
 // Get a single meal
 export const getSingleMeal = async (req, res, next) => {
   try {
@@ -142,6 +126,101 @@ export const updateMeal = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     next(createError(500, 'Meal could not be updated. Please try again!'));
+  }
+};
+
+// Get all meals
+export const getAllMeals = async (req, res, next) => {
+  try {
+    const meals = await Meal.find().sort('-createdAt');
+
+    if (meals) {
+      res.status(200).json(meals);
+    } else {
+      return next(createError(400, 'Meals not found! Please try again!'));
+    }
+  } catch (error) {
+    console.log(error);
+    next(createError(500, 'Meals could not be accessed. Please try again!'));
+  }
+};
+
+// Get meats category
+export const getMeatCategory = async (req, res, next) => {
+  try {
+    const meats = await Meal.find({ category: 'Eri-Ethio Meal' });
+
+    if (meats) {
+      res.status(200).json(meats);
+    } else {
+      return next(createError(400, 'Meats meal not found! Please try again!'));
+    }
+  } catch (error) {
+    console.log(error);
+    next(
+      createError(500, 'Meats meal could not be accessed. Please try again!')
+    );
+  }
+};
+
+// Get Vegan category
+export const getVeganCategory = async (req, res, next) => {
+  try {
+    const veganDishes = await Meal.find({ category: 'Eri-Ethio Vegan' });
+
+    if (veganDishes) {
+      res.status(200).json(veganDishes);
+    } else {
+      return next(
+        createError(400, 'Vegan dishes not found! Please try again!')
+      );
+    }
+  } catch (error) {
+    console.log(error);
+    next(
+      createError(500, 'Vegan dishes could not be accessed. Please try again!')
+    );
+  }
+};
+
+// Get mixed Meals category
+export const getMixedCategory = async (req, res, next) => {
+  try {
+    const mixedDishes = await Meal.find({ category: 'Eri-Ethio Mixed Meal' });
+
+    if (mixedDishes) {
+      res.status(200).json(mixedDishes);
+    } else {
+      return next(createError(400, 'Mixed Meal not found! Please try again!'));
+    }
+  } catch (error) {
+    console.log(error);
+    next(
+      createError(500, 'Mixed Meal could not be accessed. Please try again!')
+    );
+  }
+};
+
+// Get East Africa Meals category
+export const getEastAfrocaCategory = async (req, res, next) => {
+  try {
+    const dishes = await Meal.find({ category: 'East Africa Meal' });
+
+    if (dishes) {
+      res.status(200).json(dishes);
+    } else {
+      return next(
+        createError(400, 'East Africa dishes not found! Please try again!')
+      );
+    }
+  } catch (error) {
+    console.log(error);
+    next(
+      createError(
+        500,
+        'East Africa dishes could not be accessed. Please try again!'
+      )
+    );
   }
 };
 

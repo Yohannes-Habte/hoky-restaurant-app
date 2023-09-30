@@ -13,7 +13,7 @@ const CarouselDishItems = ({ imageurl, name, price, description }) => {
         </figure>
         <article className="dish-name-price-container">
           <h4 className="dish-name"> {name} </h4>
-          <p className="dish-price"> {price} </p>
+          <p className="dish-price"> €{price} </p>
         </article>
 
         <p className="paragraph"> {ShortenText(description, 40)} </p>

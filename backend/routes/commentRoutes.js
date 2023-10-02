@@ -5,15 +5,16 @@ import {
   getComment,
   newComment,
 } from '../controllers/commentController.js';
+import { adminAuth } from '../middleware.js/authMiddleware.js';
 
 // Comment Router
 const commentRouter = express.Router();
 
 // comment routes
 commentRouter.post('/new-comment', newComment);
-commentRouter.get('/:id', getComment);
+commentRouter.get('/:id',  getComment);
 commentRouter.delete('/:id', deleteComment);
-commentRouter.get('/', getAllComments);
+commentRouter.get('/',  getAllComments);
 
 // Export comment router
 export default commentRouter;

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import axios from 'axios';
 import './AddNew.scss';
+import HandleData from '../../functions/HandleData';
+import PageLoader from '../loader/PageLoader';
+import ButtonLoader from '../loader/ButtonLoader';
 
 const NewUser = ({ setOpen }) => {
   // State variables
   const [image, setImage] = useState('');
   const [imagePreview, setImagePreview] = useState(null);
-  const [inputs, setInputs] = useState([]);
   const [userInfo, setUserInfo] = useState({});
 
   // Handle input change
@@ -22,18 +24,10 @@ const NewUser = ({ setOpen }) => {
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
-  // UseEffect to display user inputs
-  useEffect(() => {
-    const fetchInputs = async () => {
-      try {
-        const { data } = await axios.get(
-          'http://localhost:5000/api/forms/user-inputs'
-        );
-        setInputs(data);
-      } catch (error) {}
-    };
-    fetchInputs();
-  }, []);
+  // Display drink inputs using useEffect Global Function
+  const { data, loading, error } = HandleData(
+    'http://localhost:5000/api/forms/user-inputs'
+  );
 
   // handle submit
   const handleSubmit = async (e) => {
@@ -101,23 +95,33 @@ const NewUser = ({ setOpen }) => {
             </div>
 
             {/* Additional user inputs */}
-            {inputs.map((input) => {
-              return (
-                <div key={input._id} className="input-container">
-                  <input
-                    type={input.type}
-                    name={input.name}
-                    id={input.id}
-                    onChange={handleChange}
-                    placeholder={input.placeholder}
-                    className="input-field"
-                  />
-                  <span className="input-highlight"></span>
-                </div>
-              );
-            })}
+            {loading ? (
+              <PageLoader />
+            ) : error ? (
+              error
+            ) : (
+              data.map((input) => {
+                return (
+                  <div key={input.id} className="input-container">
+                    <input
+                      type={input.type}
+                      name={input.name}
+                      id={input.id}
+                      onChange={handleChange}
+                      placeholder={input.placeholder}
+                      className="input-field"
+                    />
+                    <span className="input-highlight"></span>
+                  </div>
+                );
+              })
+            )}
 
-            <button className="add-btn">Send</button>
+            <button className="add-btn">
+              {loading && <ButtonLoader />}
+              {loading && <span>Loading...</span>}
+              {!loading && <span>Send</span>}
+            </button>
           </form>
 
           {/* Image priview */}

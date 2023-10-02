@@ -6,20 +6,3 @@ export const generateToken = (id) => {
   return token;
 };
 
-// Auth User
-const userAuth = async (req, res, next) => {
-  const token = req.cookies.access_token;
-  try {
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-// Auth Admin
-const userAdmin = async (req, res, next) => {
-  const token = req.cookies.access_token;
-  try {
-  } catch (error) {
-    console.log(error);
-  }
-};

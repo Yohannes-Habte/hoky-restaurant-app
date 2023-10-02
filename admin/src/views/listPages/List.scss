@@ -43,7 +43,9 @@
 
   // Remarks from the customers
   .reservations {
-    margin-top: 1rem;
+    width: $laptop;
+    margin: 1rem auto;
+
     .reservations-title {
       @include title;
     }

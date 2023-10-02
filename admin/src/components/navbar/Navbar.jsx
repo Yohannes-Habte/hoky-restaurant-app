@@ -1,13 +1,21 @@
 import React from 'react';
 import './Navbar.scss';
-import { FiSearch } from 'react-icons/fi';
-import { TbSettings } from 'react-icons/tb';
 import { PiSquaresFourLight } from 'react-icons/pi';
 import { FaRegBell, FaSearch } from 'react-icons/fa';
 import { BsCircleHalf } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
+import HandleData from '../../functions/HandleData';
 
 const Navbar = () => {
+  // Global state variables and displaying user name
+  const { data, loading, error } = HandleData(
+    'http://localhost:5000/api/users/user/name'
+  );
+
+  const { data: photo } = HandleData(
+    'http://localhost:5000/api/users/user/photo'
+  );
+  console.log('Admin name is:', data);
   return (
     <nav className="navbar">
       <h2 className="logo">
@@ -16,33 +24,25 @@ const Navbar = () => {
         </NavLink>
       </h2>
 
-         {/* Search container */}
-         <div className="search">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="navbar-input"
-          />
-          <FaSearch className="search-icon" />
-        </div>
+      {/* Search container */}
+      <div className="search">
+        <input type="text" placeholder="Search..." className="navbar-input" />
+        <FaSearch className="search-icon" />
+      </div>
 
-      <div className="icons-user">
-        <figure className="icons">
-          <PiSquaresFourLight />
-          <BsCircleHalf />
-        </figure>
-        <div className="notification">
-          <FaRegBell className="bell" />
-          <span className="message-notification">1</span>
-        </div>
-        <div className="user">
+      <div className="loggedIn-user">
+        {data ? <span className="user-name"> {data} </span> : ''}
+        <figure className="image-container">
           <img
             className="user-photo"
-            src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
+            src={
+              photo
+                ? photo
+                : 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg'
+            }
             alt=""
           />
-          <span> Habte </span>
-        </div>
+        </figure>
       </div>
     </nav>
   );

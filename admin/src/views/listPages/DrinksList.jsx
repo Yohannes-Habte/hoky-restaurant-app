@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
-import OrdersDataTable from '../../components/tables/dataGridTables/OrdersDataTable';
-import './List.scss';
+import Sidebar from '../../components/sidebar/Sidebar';
+import AddDrink from '../../components/addNew/AddDrink';
+import DrinksDataTable from '../../components/tables/dataGridTables/DrinksDataTable';
 import ButtonLoader from '../../components/loader/ButtonLoader';
 
-const OrderList = () => {
-  // Local state variables
+const DrinksList = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  
   return (
     <main className="list-page">
       {/* Navbar component */}
@@ -18,24 +16,26 @@ const OrderList = () => {
       <div className="list-container">
         <Sidebar />
         <section className="table-list-container">
-          <h1 className="title">Order Information</h1>
+          <h1 className="title">Drinks Information</h1>
 
           {/* List Infos */}
           <article className="add-to-list">
-            <h3 className="subTitle"> List of Orders </h3>
-            <button className="add-btn">
+            <h3 className="subTitle"> List of Drinks </h3>
+
+            <button onClick={() => setOpen(true)} className="add-btn">
               {loading && <ButtonLoader />}
               {loading && <span>Loading...</span>}
-              {!loading && <span>Add Order</span>}
+              {!loading && <span>Add Drink</span>}
             </button>
           </article>
 
-          {/* Order data table component */}
-          <OrdersDataTable />
+          {/* Meals data table component */}
+          <DrinksDataTable />
         </section>
       </div>
+      {open && <AddDrink setOpen={setOpen} />}
     </main>
   );
 };
 
-export default OrderList;
+export default DrinksList;

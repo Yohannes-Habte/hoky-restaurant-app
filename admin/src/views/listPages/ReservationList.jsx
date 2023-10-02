@@ -3,30 +3,21 @@ import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import ReservationDataTable from '../../components/tables/dataGridTables/ReservationDataTable';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import axios from 'axios';
+import ButtonLoader from '../../components/loader/ButtonLoader';
+import HandleData from '../../functions/HandleData';
 
 const ReservationList = () => {
-  // Local state variable
-  const [data, setData] = useState([]);
+  // Local state variables
+  const [open, setOpen] = useState(false);
 
   // Display reservations in the frontend
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(
-          `http://localhost:5000/api/reservations`
-        );
-        setData(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+  const { data, loading, error } = HandleData(
+    'http://localhost:5000/api/reservations'
+  );
 
   // Delete single reservation
-  const deleteComment = async (id) => {
+  const deleteReservation = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/reservations/${id}`);
     } catch (error) {
@@ -47,8 +38,10 @@ const ReservationList = () => {
           {/* List Infos */}
           <article className="add-to-list">
             <h3 className="subTitle"> List of Reservations </h3>
-            <button disabled className="add-btn">
-              Add Reservation
+            <button className="add-btn">
+              {loading && <ButtonLoader />}
+              {loading && <span>Loading...</span>}
+              {!loading && <span>Add Reservation</span>}
             </button>
           </article>
 
@@ -79,7 +72,7 @@ const ReservationList = () => {
 
                 {/* Close comment */}
                 <span
-                  onClick={() => deleteComment(reservation._id)}
+                  onClick={() => deleteReservation(reservation._id)}
                   className="close"
                 >
                   X

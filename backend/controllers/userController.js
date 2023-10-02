@@ -159,6 +159,52 @@ export const userLoginStatus = async (req, res, next) => {
 };
 
 //=====================================================================
+// Get user login name
+//=====================================================================
+export const getName = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    const role = users.filter((user) => user.role === 'admin');
+    if (role) {
+      return res
+        .status(200)
+        .json(
+          `${role.map((user) => user.firstName)} ${role.map(
+            (user) => user.lastName
+          )}`
+        );
+    } else {
+      return next(createError(400, 'User is not an Admin!'));
+    }
+  } catch (error) {
+    console.log(error);
+    return next(
+      createError(400, 'Server could not be queried! Please try again!')
+    );
+  }
+};
+
+//=====================================================================
+// Get user login photo
+//=====================================================================
+export const getPhoto = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    const photo = users.filter((user) => user.role === 'admin');
+    if (photo) {
+      return res.status(200).json(photo.map((user) => user.image));
+    } else {
+      return next(createError(400, 'User photo not found!'));
+    }
+  } catch (error) {
+    console.log(error);
+    return next(
+      createError(400, 'Server could not be queried! Please try again!')
+    );
+  }
+};
+
+//=====================================================================
 // Update User Profile except photo
 //=====================================================================
 export const updateUserProfile = async (req, res, next) => {

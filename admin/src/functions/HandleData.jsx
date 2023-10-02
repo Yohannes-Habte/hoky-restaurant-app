@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Fetch = (url) => {
+const HandleData = (url) => {
   // State variables for fetching data
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -12,9 +12,7 @@ const Fetch = (url) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const { data } = await axios.get(
-          process.env.REACT_APP_BACKEND_URL + url
-        );
+        const { data } = await axios.get(url);
         setData(data);
       } catch (err) {
         setError(err);
@@ -29,7 +27,7 @@ const Fetch = (url) => {
   const reFetch = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get(process.env.REACT_APP_BACKEND_URL + url);
+      const { data } = await axios.get(url);
       setData(data);
     } catch (err) {
       setError(err);
@@ -41,7 +39,7 @@ const Fetch = (url) => {
   const deleteData = async () => {
     setLoading(true);
     try {
-      await axios.delete(process.env.REACT_APP_BACKEND_URL + url);
+      await axios.delete(url);
     } catch (err) {
       setError(err);
     }
@@ -52,7 +50,7 @@ const Fetch = (url) => {
   const postData = async (postingData) => {
     setLoading(true);
     try {
-      await axios.post(process.env.REACT_APP_BACKEND_URL + url, postingData);
+      await axios.post( url, postingData);
     } catch (error) {
       setError(error);
     }
@@ -62,4 +60,4 @@ const Fetch = (url) => {
   return { data, loading, error, reFetch, deleteData, postData };
 };
 
-export default Fetch;
+export default HandleData;

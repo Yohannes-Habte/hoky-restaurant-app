@@ -1,16 +1,19 @@
+import React from 'react';
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaCloudUploadAlt } from 'react-icons/fa';
+import './AddNew.scss';
 import HandleData from '../../functions/HandleData';
 import PageLoader from '../loader/PageLoader';
 import { toast } from 'react-toastify';
+import ErrorMessage from '../messages/ErrorMessage';
 import ButtonLoader from '../loader/ButtonLoader';
 
-const AddMeal = ({ setOpen }) => {
+const AddDrink = ({ setOpen }) => {
   // Local State Variables
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [mealInfo, setMealInfo] = useState({});
+  const [drinkInfo, setDrinkInfo] = useState({});
 
   // Handle image change
   const handleImageChange = (e) => {
@@ -21,12 +24,12 @@ const AddMeal = ({ setOpen }) => {
   // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setMealInfo({ ...mealInfo, [name]: value });
+    setDrinkInfo({ ...drinkInfo, [name]: value });
   };
 
-  // Display meal inputs using useEffect Global Function
+  // Display drink inputs using useEffect Global Function
   const { data, loading, error } = HandleData(
-    'http://localhost:5000/api/forms/meal-inputs'
+    'http://localhost:5000/api/forms/drink-inputs'
   );
 
   // handle submit
@@ -41,46 +44,48 @@ const AddMeal = ({ setOpen }) => {
           image.type === 'image/jpg' ||
           image.type === 'image/png')
       ) {
-        const mealImage = new FormData();
-        mealImage.append('file', image);
-        mealImage.append('cloud_name', 'dzlsa51a9');
-        mealImage.append('upload_preset', 'upload');
+        const drinkImage = new FormData();
+        drinkImage.append('file', image);
+        drinkImage.append('cloud_name', 'dzlsa51a9');
+        drinkImage.append('upload_preset', 'upload');
 
         // Save image to cloudinary
         const response = await axios.post(
           `https://api.cloudinary.com/v1_1/dzlsa51a9/image/upload`,
-          mealImage
+          drinkImage
         );
         const { url } = response.data;
+        console.log(response);
 
         // New Meal body
-        const newMeal = {
-          name: mealInfo.name,
-          price: mealInfo.price,
-          discountedPrice: mealInfo.discountedPrice,
-          category: mealInfo.category,
-          description: mealInfo.description,
-          quantity: mealInfo.quantity,
-          featured: mealInfo.featured,
+        const newDrink = {
+          name: drinkInfo.name,
+          price: drinkInfo.price,
           image: url,
+          quantity: drinkInfo.quantity,
+          category: drinkInfo.category,
+          brand: drinkInfo.brand,
+          description: drinkInfo.description,
+          featured: drinkInfo.featured,
         };
 
-        // Post new Meal to the backend
+        // Post new drink to the backend
         const { data } = await axios.post(
-          'http://localhost:5000/api/meals/new-meal',
-          newMeal,
+          'http://localhost:5000/api/drinks/new-drink',
+          newDrink,
           { withCredentials: true }
         );
 
         // Reset
         e.target.reset();
 
-        toast.success('Meal is successfully create!');
+        toast.success('Drink is successfully create!');
       } else {
         throw new Error('Image is not valid! Please try again!');
       }
-    } catch (error) {
+    } catch (err) {
       console.log(error);
+      toast.error(ErrorMessage(err));
     }
   };
 
@@ -90,9 +95,9 @@ const AddMeal = ({ setOpen }) => {
         <span onClick={() => setOpen(false)} className="close">
           X
         </span>
-        <h3 className="title"> Add New Meal </h3>
+        <h3 className="title"> Add Drink </h3>
         <section className="imagePreview-form-container">
-          {/* Meal Form */}
+          {/* Drink Form */}
           <form onSubmit={handleSubmit} action="" className="form">
             {/* Image input */}
             <div className="file-input-container">
@@ -110,7 +115,7 @@ const AddMeal = ({ setOpen }) => {
               </label>
             </div>
 
-            {/* Additional user inputs */}
+            {/* Additional drink inputs */}
             {loading ? (
               <PageLoader />
             ) : error ? (
@@ -149,7 +154,7 @@ const AddMeal = ({ setOpen }) => {
                   ? imagePreview
                   : 'https://icon-library.com/images/no-image-icon//no-image-icon-0.jpg'
               }
-              alt="Profile"
+              alt="Drink"
             />
           </figure>
         </section>
@@ -158,4 +163,4 @@ const AddMeal = ({ setOpen }) => {
   );
 };
 
-export default AddMeal;
+export default AddDrink;

@@ -12,6 +12,7 @@ import { validateEmail } from '../../utiles/Utiles';
 import { Helmet } from 'react-helmet-async';
 import { UserContext } from '../../context/user/UserProvider';
 import { USER_ACTION } from '../../context/user/UserReducer';
+import ButtonLoader from '../../components/loader/ButtonLoader';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -152,7 +153,9 @@ const Login = () => {
               </div>
             </div>
             <button type="submit" className="login-button">
-              Log In
+              {loading && <ButtonLoader />}
+              {loading && <span>Loading...</span>}
+              {!loading && <span>Log In</span>}
             </button>
           </form>
         </fieldset>

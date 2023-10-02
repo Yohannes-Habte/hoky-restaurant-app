@@ -1,5 +1,6 @@
 import Comment from '../models/commentModel.js';
 import createError from 'http-errors';
+import User from '../models/userModel.js';
 
 // Create new commnet
 export const newComment = async (req, res, next) => {
@@ -38,6 +39,7 @@ export const getComment = async (req, res, next) => {
 // Delete Single commnet
 export const deleteComment = async (req, res, next) => {
   try {
+    const user = await User.findById(req.params.id);
     const comment = await Comment.findByIdAndDelete(req.params.id);
     if (comment) {
       res.status(200).json({ message: 'Comment successfully deleted!' });
@@ -48,20 +50,20 @@ export const deleteComment = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
-    next(createError(500, 'Server could not query! Please try again!'));
+    next(createError(500, 'Server could not query! Please try again!'));  
   }
 };
 
 // Get all commnets
 export const getAllComments = async (req, res, next) => {
   try {
+    const user = await User.findById(req.params.id);
     const comments = await Comment.find().sort('createdAt');
+
     if (comments) {
       res.status(200).json(comments);
     } else {
-      res
-        .status(400)
-        .json({ message: 'Comments not found! Please try again!' });
+      return next(createError(500, 'Comments not found! Please try again!'));
     }
   } catch (error) {
     console.log(error);

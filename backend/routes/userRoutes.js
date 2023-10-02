@@ -1,5 +1,7 @@
 import express from 'express';
 import {
+  getName,
+  getPhoto,
   getUser,
   getUsers,
   loginUser,
@@ -18,6 +20,8 @@ const userRouter = express.Router();
 userRouter.post('/register', registerUser);
 userRouter.post('/login', loginUser);
 userRouter.get('/user/loginStatus', userLoginStatus);
+userRouter.get('/user/name', getName);
+userRouter.get('/user/photo', getPhoto);
 userRouter.get('/user/logout', logoutUser);
 userRouter.patch('/:id', userAuth, updateUserProfile);
 userRouter.patch('/:id/update-photo', userAuth, updateUserPhoto);

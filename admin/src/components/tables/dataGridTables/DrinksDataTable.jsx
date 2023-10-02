@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import React, { useContext, useState } from 'react';
 import HandleData from '../../../functions/HandleData';
 import PageLoader from '../../loader/PageLoader';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
-import { FaExternalLinkAlt } from 'react-icons/fa';
-import { BsFillTrash3Fill } from 'react-icons/bs';
 import axios from 'axios';
+import './DataTable.scss';
+import { BsFillTrash3Fill } from 'react-icons/bs';
+import { FaExternalLinkAlt } from 'react-icons/fa';
+import { ProductsContext } from '../../../context/products/ProductsProvider';
+import { PRODUCT_ACTION } from '../../../context/products/ProductsReducer';
 import ButtonLoader from '../../loader/ButtonLoader';
 
-const MealsDataTable = () => {
-  // State variables for the drinks Id in the table
-  const [indexes, setIndexes] = useState([]);
-  // Global state variables
-  // Display meals using useEffect Global Function
+const DrinksDataTable = () => {
+  // Global state variables and displaying date in the frontend using useEffect hook
+  const { dispatch } = useContext(ProductsContext);
   const { data, loading, error } = HandleData(
-    'http://localhost:5000/api/meals'
+    'http://localhost:5000/api/drinks'
   );
-
   // State variables for the drinks Id in the table
   const [index, setIndex] = useState();
 
@@ -28,21 +28,17 @@ const MealsDataTable = () => {
   // Delete all drinks
   const handleDeleteAll = () => {
     console.log(index);
+    dispatch({ type: PRODUCT_ACTION.DRINK_DELETED, payload: index });
   };
 
-  // Meal header
+  // Drink header
   const columns = [
-    { field: '_id', headerName: 'Meal ID', width: 250 },
+    { field: '_id', headerName: 'Drink ID', width: 250 },
     { field: 'name', headerName: 'Name', width: 130 },
     { field: 'price', headerName: 'Price', type: 'number', width: 100 },
-    {
-      field: 'discountedPrice',
-      headerName: 'Discount',
-      type: 'number',
-      width: 70,
-    },
-    { field: 'quantity', headerName: 'Quantity', type: 'number', width: 100 },
     { field: 'category', headerName: 'Category', width: 150 },
+    { field: 'brand', headerName: 'Brand', width: 150 },
+    { field: 'quantity', headerName: 'Quantity', type: 'number', width: 100 },
 
     {
       field: 'featured',
@@ -113,7 +109,7 @@ const MealsDataTable = () => {
             disableRowSelectionOnClick
             //
             onRowSelectionModelChange={(ids) => {
-              setIndexes(ids);
+              setIndex(ids);
             }}
           />
         </div>
@@ -122,4 +118,4 @@ const MealsDataTable = () => {
   );
 };
 
-export default MealsDataTable;
+export default DrinksDataTable;

@@ -5,19 +5,25 @@ import './Comments.scss';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import PageLoader from '../../components/loader/PageLoader';
 
 const Comments = () => {
-  // Local state variable
+  // State variables for fetching data
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   // Display comments in the frontend
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const { data } = await axios.get(`http://localhost:5000/api/comments`);
         setData(data);
-      } catch (error) {
-        console.log(error);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
       }
     };
     fetchData();
@@ -26,7 +32,9 @@ const Comments = () => {
   // Delete single comment
   const deleteComment = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/comments/${id}`);
+      await axios.delete(`http://localhost:5000/api/comments/${id}`, {
+        withCredentials: true,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -43,38 +51,44 @@ const Comments = () => {
           <h1 className="title">Customers Comments</h1>
 
           {/* Specific comment */}
-          <div className="wrapper">
-            {data.map((comment) => {
-              return (
-                <article className="comment">
-                  <h3 className="subTitle">
-                    {comment.firstName} {comment.lastName}
-                  </h3>
+          {loading ? (
+            <PageLoader />
+          ) : error ? (
+            error
+          ) : (
+            <div className="wrapper">
+              {data.map((comment) => {
+                return (
+                  <article className="comment">
+                    <h3 className="subTitle">
+                      {comment.firstName} {comment.lastName}
+                    </h3>
 
-                  <p className="paragraph">
-                    {comment.message}{' '}
-                    <span className="createdAt">
-                      The message is sent on{' '}
-                      <strong className="date">{comment.createdAt}</strong>
+                    <p className="paragraph">
+                      {comment.message}{' '}
+                      <span className="createdAt">
+                        The message is sent on{' '}
+                        <strong className="date">{comment.createdAt}</strong>
+                      </span>
+                    </p>
+
+                    <p className="paragraph">
+                      Please email me to{' '}
+                      <strong className="email">{comment.email}</strong>
+                    </p>
+
+                    {/* Close comment */}
+                    <span
+                      onClick={() => deleteComment(comment._id)}
+                      className="close"
+                    >
+                      X
                     </span>
-                  </p>
-
-                  <p className="paragraph">
-                    Please email me to{' '}
-                    <strong className="email">{comment.email}</strong>
-                  </p>
-
-                  {/* Close comment */}
-                  <span
-                    onClick={() => deleteComment(comment._id)}
-                    className="close"
-                  >
-                    X
-                  </span>
-                </article>
-              );
-            })}
-          </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
         </section>
       </div>
     </main>

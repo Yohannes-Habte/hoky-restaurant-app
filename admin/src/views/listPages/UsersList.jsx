@@ -4,8 +4,15 @@ import Navbar from '../../components/navbar/Navbar';
 import UserDataTable from '../../components/tables/dataGridTables/UserDataTable';
 import './List.scss';
 import NewUser from '../../components/addNew/NewUser';
+import HandleData from '../../functions/HandleData';
+import ButtonLoader from '../../components/loader/ButtonLoader';
 
 const UsersList = () => {
+  // Display reservations in the frontend
+  const { data, loading, error } = HandleData(
+    'http://localhost:5000/api/users'
+  );
+  // Local state variable
   const [open, setOpen] = useState(false);
 
   return (
@@ -22,7 +29,9 @@ const UsersList = () => {
           <article className="add-to-list">
             <h3 className="subTitle"> List of Users </h3>
             <button onClick={() => setOpen(true)} className="add-btn">
-              Add User
+              {loading && <ButtonLoader />}
+              {loading && <span>Loading...</span>}
+              {!loading && <span>Add Reservation</span>}
             </button>
           </article>
 

@@ -9,11 +9,13 @@ import cookieParser from 'cookie-parser';
 // Routes
 import userRouter from './routes/userRoutes.js';
 import mealRouter from './routes/mealRoutes.js';
+import drinkRouter from './routes/drinkRoutes.js';
 import reservationRouter from './routes/reservationRoutes.js';
 import paymentRouter from './routes/paymentRoutes.js';
 import commentRouter from './routes/commentRoutes.js';
 import globalErrorHandler from './middleware.js/globalErrorHandler.js';
 import formRouter from './routes/formRoutes.js';
+
 
 
 // Express app
@@ -49,6 +51,7 @@ app.use(morgan('tiny'));
 // End points
 app.use('/api/users', userRouter);
 app.use('/api/meals', mealRouter);
+app.use('/api/drinks', drinkRouter);
 app.use('/api/reservations', reservationRouter);
 app.use('/api/payments', paymentRouter);
 app.use('/api/comments', commentRouter);

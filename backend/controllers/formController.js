@@ -1,9 +1,6 @@
-import {
-  mealInuts,
-  reservationInputs,
-  sidebarMenu,
-  userInputs,
-} from '../dataFrontend.js';
+import createError from 'http-errors';
+import { drinkInuts, mealInuts, reservationInputs, sidebarMenu, userInputs } from '../data/frontendData.js';
+
 
 // Get user Form inputs
 export const getUserFormInputs = (req, res, next) => {
@@ -17,7 +14,7 @@ export const getUserFormInputs = (req, res, next) => {
   }
 };
 
-// Get user Form inputs
+// Get meal Form inputs
 export const getMealFormInputs = async (req, res, next) => {
   const mealInput = mealInuts;
   if (mealInput) {
@@ -26,6 +23,18 @@ export const getMealFormInputs = async (req, res, next) => {
     res
       .status(200)
       .json({ message: 'Meal inputs not found. Please try again!' });
+  }
+};
+
+// Get drink Form inputs
+export const getDrinkFormInputs = async (req, res, next) => {
+  const drinkInput = drinkInuts;
+  if (drinkInput) {
+    res.status(200).json(drinkInput);
+  } else {
+    res
+      .status(200)
+      .json({ message: 'Drink inputs not found. Please try again!' });
   }
 };
 
@@ -47,8 +56,8 @@ export const getSidebar = async (req, res, next) => {
   if (sideMenu) {
     res.status(200).json(sideMenu);
   } else {
-    res
-      .status(200)
-      .json({ message: 'Sidebar Menu inputs not found. Please try again!' });
+    return next(
+      createError(400, 'Sidebar Menu inputs not found. Please try again!')
+    );
   }
 };

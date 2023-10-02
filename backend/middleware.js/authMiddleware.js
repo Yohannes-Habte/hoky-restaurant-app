@@ -20,15 +20,6 @@ export const userAuth = async (req, res, next) => {
     // Get user ID from the token
     const user = await User.findById(verifiedToken.id).select('-password');
 
-    // Validate user
-    /**
-    if(!user) {
-        res.status(401)
-        throw new Error("User not found")
-    }
-    req.user = user; // This is used to use to replace req.params.id by req.user._id in the userController function
-     */
-
     if (user.id === req.params.id || user.isAdmin) {
       req.user = user;
       return next();
@@ -58,6 +49,7 @@ export const adminAuth = async (req, res, next) => {
     // Find user ID from the database
     const user = await User.findById(decodedToken.id);
     if (user.id && user.isAdmin && user.role === 'admin') {
+      req.user = user;
       next();
     } else {
       return next(createError(403, 'User is not authorized as an admin!'));

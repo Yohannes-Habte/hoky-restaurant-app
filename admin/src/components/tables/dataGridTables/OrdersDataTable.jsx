@@ -1,9 +1,34 @@
-import React from 'react'
-import { DataGrid } from '@mui/x-data-grid';
+import React, { useState } from 'react';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import HandleData from '../../../functions/HandleData';
+import PageLoader from '../../loader/PageLoader';
+import { Link } from 'react-router-dom';
+import { FaExternalLinkAlt } from 'react-icons/fa';
+import { BsFillTrash3Fill } from 'react-icons/bs';
+import axios from 'axios';
+import ButtonLoader from '../../loader/ButtonLoader';
 
 const OrdersDataTable = () => {
+  // State variables for the drinks Id in the table
+  const [indexes, setIndexes] = useState([]);
+  // Global state variables
+  // Display meals using useEffect Global Function
+  const { data, loading, error } = HandleData(
+    'http://localhost:5000/api/reservations'
+  );
+
+  // Delete single drink
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:3000/api/drinks/${id}`);
+  };
+
+  // Delete all drinks
+  const handleDeleteAll = () => {
+    console.log(indexes);
+  };
+
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
+    { field: '_id', headerName: 'ID', width: 250 },
     { field: 'firstName', headerName: 'First name', width: 130 },
     { field: 'lastName', headerName: 'Last name', width: 130 },
     { field: 'email', headerName: 'Email Addres', width: 130 },
@@ -15,104 +40,74 @@ const OrdersDataTable = () => {
       width: 90,
     },
     {
-      field: 'fullName',
-      headerName: 'Full name',
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+      field: 'action',
+      headerName: 'Action',
+      width: 70,
+      renderCell: (params) => {
+        return (
+          <div className="action-wrapper">
+            <Link to={'/users/userId'} className={'link'}>
+              <FaExternalLinkAlt />
+            </Link>
+            <button
+              onClick={() => handleDelete(params.row._id)}
+              className="button"
+            >
+              <BsFillTrash3Fill />
+            </button>
+          </div>
+        );
+      },
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      lastName: 'Snow',
-      firstName: 'Jon',
-      email: 'joel@gmail.com',
-      phone: '+4917681005650',
-      age: 35,
-    },
-    {
-      id: 2,
-      lastName: 'Lannister',
-      firstName: 'Cersei',
-      email: 'joel@gmail.com',
-      phone: '+4917681005650',
-      age: 42,
-    },
-    {
-      id: 3,
-      lastName: 'Lannister',
-      firstName: 'Jaime',
-      email: 'joel@gmail.com',
-      phone: '+4917681005650',
-      age: 45,
-    },
-    {
-      id: 4,
-      lastName: 'Stark',
-      firstName: 'Arya',
-      email: 'joel@gmail.com',
-      phone: '+4917681005650',
-      age: 16,
-    },
-    {
-      id: 5,
-      lastName: 'Targaryen',
-      firstName: 'Daenerys',
-      email: 'joel@gmail.com',
-      phone: '+4917681005650',
-      age: null,
-    },
-    {
-      id: 6,
-      lastName: 'Melisandre',
-      firstName: null,
-      email: 'joel@gmail.com',
-      phone: '+4917681005650',
-      age: 150,
-    },
-    {
-      id: 7,
-      lastName: 'Clifford',
-      firstName: 'Ferrara',
-      email: 'joel@gmail.com',
-      phone: '+4917681005650',
-      age: 44,
-    },
-    {
-      id: 8,
-      lastName: 'Frances',
-      firstName: 'Rossini',
-      email: 'joel@gmail.com',
-      phone: '+4917681005650',
-      age: 36,
-    },
-    {
-      id: 9,
-      lastName: 'Roxie',
-      firstName: 'Harvey',
-      email: 'joel@gmail.com',
-      phone: '+4917681005650',
-      age: 65,
-    },
-  ];
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-        pageSizeOptions={[5, 10]}
-        checkboxSelection
-      />
+    <div className="table-container">
+      <button onClick={handleDeleteAll} className="delete-btn">
+        {loading && <ButtonLoader />}
+        {loading && <span>Deleting...</span>}
+        {!loading && <span>Delete</span>}
+      </button>
+      {loading ? (
+        <PageLoader />
+      ) : error ? (
+        error
+      ) : (
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid
+            // Rows
+            rows={data}
+            getRowId={(row) => row._id}
+            // Columns
+            columns={columns}
+            // Initial state
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 5 },
+              },
+            }}
+            // Create search bar
+            slots={{ toolbar: GridToolbar }}
+            // Search a specific item
+            slotProps={{
+              toolbar: {
+                showQuickFilter: true,
+                quickFilterProps: { debounceMs: 500 },
+              },
+            }}
+            // Page size optons
+            pageSizeOptions={[5, 10]}
+            checkboxSelection
+            disableRowSelectionOnClick
+            //
+            onRowSelectionModelChange={(ids) => {
+              setIndexes(ids);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };
 
-export default OrdersDataTable
+export default OrdersDataTable;

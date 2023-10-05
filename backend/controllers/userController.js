@@ -83,7 +83,7 @@ export const loginUser = async (req, res, next) => {
 
     // If user exist and password is valid, user will login
     if (user && isPasswordValid) {
-      const { password, isAdmin, ...otherDetails } = user._doc;
+      const { password, isAdmin, role, ...otherDetails } = user._doc;
 
       // Token of the user
       const token = generateToken(user._id);
@@ -98,7 +98,7 @@ export const loginUser = async (req, res, next) => {
           secure: true,
         })
         .status(200)
-        .json({ ...otherDetails });
+        .json({ details: { ...otherDetails }, token: token, role, isAdmin });
     } else {
       return next(
         createError(400, 'Invalid email or password! Please check it!')

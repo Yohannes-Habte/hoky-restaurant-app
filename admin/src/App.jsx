@@ -19,9 +19,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { bgContext } from './context/bgColors/BgProdiver';
 import HandleData from './functions/HandleData';
-import "./styles/Dark.scss"
-import "./styles/Gray.scss"
-import "./styles/Ghost.scss"
+import './styles/Dark.scss';
+import './styles/Gray.scss';
+import './styles/Ghost.scss';
 
 const App = () => {
   //& The credentials will work with every http request and send the token
@@ -65,14 +65,63 @@ const App = () => {
           theme="light"
         />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
-          <Route path="/users" element={<UsersList />} />
-          <Route path="/meals" element={<MealsList />} />
-          <Route path="/drinks" element={<DrinksList />} />
-          <Route path="/reservations" element={<ReservationList />} />
-          <Route path="/orders" element={<OrderList />} />
-          <Route path="/comments" element={<Comments />} />
+          <Route
+            path="/users"
+            element={
+              <ProtectedRoute>
+                <UsersList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/meals"
+            element={
+              <ProtectedRoute>
+                <MealsList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/drinks"
+            element={
+              <ProtectedRoute>
+                <DrinksList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reservations"
+            element={
+              <ProtectedRoute>
+                <ReservationList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <OrderList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/comments"
+            element={
+              <ProtectedRoute>
+                <Comments />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

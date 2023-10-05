@@ -13,6 +13,7 @@ import { Helmet } from 'react-helmet-async';
 import { UserContext } from '../../context/user/UserProvider';
 import { USER_ACTION } from '../../context/user/UserReducer';
 import ButtonLoader from '../../components/loader/ButtonLoader';
+import ErrorMessage from '../../components/messages/ErrorMessage';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -81,12 +82,20 @@ const Login = () => {
       );
       dispatch({ type: USER_ACTION.LOGIN_SUCCESS, payload: data });
 
-      localStorage.setItem('user', JSON.stringify(data));
+      // If user is admin, it is allowed to access data. Otherwise, there is not access of data
+      if (data.role === 'admin' && data.isAdmin) {
+        dispatch({ type: USER_ACTION.LOGIN_SUCCESS, payload: data.details });
+      } else {
+        toast.error('User is not authorized!');
+      }
       resetVariables();
       navigate('/');
     } catch (err) {
       console.log(err);
-      dispatch({ type: USER_ACTION.LOGIN_FAIL, error: error });
+      dispatch({
+        type: USER_ACTION.LOGIN_FAIL,
+        payload: toast.error(ErrorMessage(err)),
+      });
     }
   };
 

@@ -3,31 +3,18 @@ import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import './Comments.scss';
 import axios from 'axios';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import PageLoader from '../../components/loader/PageLoader';
+import HandleData from '../../functions/HandleData';
+import { toast } from 'react-toastify';
+import ErrorMessage from '../../components/messages/ErrorMessage';
 
 const Comments = () => {
-  // State variables for fetching data
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  // Global state variables for fetching commments
+  const { data, loading, error } = HandleData(
+    'http://localhost:5000/api/comments'
+  );
 
-  // Display comments in the frontend
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const { data } = await axios.get(`http://localhost:5000/api/comments`);
-        setData(data);
-        setLoading(false);
-      } catch (err) {
-        setError(err);
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  // Global state variables for deleting commments
 
   // Delete single comment
   const deleteComment = async (id) => {
@@ -35,8 +22,8 @@ const Comments = () => {
       await axios.delete(`http://localhost:5000/api/comments/${id}`, {
         withCredentials: true,
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      toast.error(ErrorMessage(err));
     }
   };
 

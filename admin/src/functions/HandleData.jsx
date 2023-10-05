@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import ErrorMessage from '../components/messages/ErrorMessage';
 
 const HandleData = (url) => {
   // State variables for fetching data
@@ -15,7 +17,7 @@ const HandleData = (url) => {
         const { data } = await axios.get(url);
         setData(data);
       } catch (err) {
-        setError(err);
+        setError(toast.error(ErrorMessage(err)));
       }
       setLoading(false);
     };
@@ -30,18 +32,18 @@ const HandleData = (url) => {
       const { data } = await axios.get(url);
       setData(data);
     } catch (err) {
-      setError(err);
+      setError(toast.error(ErrorMessage(err)));
     }
     setLoading(false);
   };
 
-  // Function to delete data
+  // Function to delete all data
   const deleteData = async () => {
     setLoading(true);
     try {
       await axios.delete(url);
     } catch (err) {
-      setError(err);
+      setError(toast.error(ErrorMessage(err)));
     }
     setLoading(false);
   };
@@ -50,9 +52,9 @@ const HandleData = (url) => {
   const postData = async (postingData) => {
     setLoading(true);
     try {
-      await axios.post( url, postingData);
-    } catch (error) {
-      setError(error);
+      await axios.post(url, postingData);
+    } catch (err) {
+      setError(toast.error(ErrorMessage(err)));
     }
     setLoading(false);
   };

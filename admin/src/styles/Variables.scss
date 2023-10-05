@@ -24,7 +24,7 @@ $afw: 400;
 $aafw: 600;
 $lfw: 800;
 
-// Background
+// Default Background
 $header-bg: #f3a4ce;
 $navbar-bg: #b0c4de;
 $sidebar-bg: #b0c4de;
@@ -35,7 +35,24 @@ $footer-bg: #4b0082;
 $copyright: #191970;
 $button-bg: #4682b4;
 $editbg-bg: #ebebf8;
-$delete-bg:  #fb846f;
+$delete-bg: #fb846f;
+
+// Dark Mode
+$dark-bg: #333;
+$navbar-dark-bg: #222;
+$dark-color: #d3d3d3;
+$section-bg: #444;
+$comment-blog-bg: #e6e6fa39;
+
+// Gray Mode
+$gray-bg: #acaaaa;
+$navbar-gray-bg: #808080;
+$gray-color: #000000;
+
+// Ghost Mode
+$ghost-bg: #f8f8ff;
+$navbar-ghost-bg: #e6e6fa;
+$ghost-color: #000000;
 
 // padding
 $buttonPadding: 0.2rem;

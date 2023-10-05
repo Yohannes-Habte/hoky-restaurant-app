@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
-import OrdersDataTable from '../../components/tables/dataGridTables/OrdersDataTable';
 import './List.scss';
 import ButtonLoader from '../../components/loader/ButtonLoader';
+import OrdersDataTable from '../../components/tables/OrdersDataTable';
 
 const OrderList = () => {
   // Local state variables

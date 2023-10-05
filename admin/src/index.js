@@ -6,15 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import UserProvider from './context/user/UserProvider';
 import { HelmetProvider } from 'react-helmet-async';
 import ProductsProvider from './context/products/ProductsProvider';
+import BgProdiver from './context/bgColors/BgProdiver';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <UserProvider>
       <ProductsProvider>
-        <HelmetProvider>
-          <App />
-        </HelmetProvider>
+        <BgProdiver>
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
+        </BgProdiver>
       </ProductsProvider>
     </UserProvider>
   </React.StrictMode>

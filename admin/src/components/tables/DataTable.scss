@@ -1,12 +1,13 @@
-@import '../../../styles/Variables.scss';
-@import '../../../styles/Mixins.scss';
+@import '../../styles/Variables.scss';
+@import '../../styles/Mixins.scss';
 
-.table-container {
+.wrapper {
   width: 100%;
 
   .delete-btn {
     @include btn2;
     background-color: $delete-bg;
+   margin-bottom: 1rem;
   }
 
   .action-wrapper {

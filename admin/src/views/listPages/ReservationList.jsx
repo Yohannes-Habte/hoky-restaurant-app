@@ -1,11 +1,11 @@
 import React from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
-import ReservationDataTable from '../../components/tables/dataGridTables/ReservationDataTable';
 import { useState } from 'react';
 import axios from 'axios';
 import ButtonLoader from '../../components/loader/ButtonLoader';
 import HandleData from '../../functions/HandleData';
+import ReservationDataTable from '../../components/tables/ReservationDataTable';
 
 const ReservationList = () => {
   // Local state variables

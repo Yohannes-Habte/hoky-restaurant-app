@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
 import './List.scss';
-import MealsDataTable from '../../components/tables/dataGridTables/MealsDataTable';
 import AddMeal from '../../components/addNew/AddMeal';
 import ButtonLoader from '../../components/loader/ButtonLoader';
+import MealsDataTable from '../../components/tables/MealsDataTable';
 
 const MealsList = () => {
   const [open, setOpen] = useState(false);

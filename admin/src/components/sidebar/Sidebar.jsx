@@ -1,9 +1,13 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Sidebar.scss';
+import { bgContext } from '../../context/bgColors/BgProdiver';
+import { BACKGROUND_ACTION } from '../../context/bgColors/BgReducer';
 
 const Sidebar = () => {
+  // Global backgournd color change state variables
+  const { dispatch } = useContext(bgContext);
   // Local state variable
   const [menu, setMenu] = useState([]);
 
@@ -44,11 +48,20 @@ const Sidebar = () => {
       <article className="backgroung-color">
         <h4 className="bg-title"> Background Color</h4>
         <div className="color-options">
-          <div className="color-option"></div>
+          <div
+            onClick={() => dispatch({ type: BACKGROUND_ACTION.DARK })}
+            className="color-option"
+          ></div>
 
-          <div className="color-option"></div>
+          <div
+            onClick={() => dispatch({ type: BACKGROUND_ACTION.GRAY })}
+            className="color-option"
+          ></div>
 
-          <div className="color-option"></div>
+          <div
+            onClick={() => dispatch({ type: BACKGROUND_ACTION.GHOST })}
+            className="color-option"
+          ></div>
         </div>
       </article>
     </section>

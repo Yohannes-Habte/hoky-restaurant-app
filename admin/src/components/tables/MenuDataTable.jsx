@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import './DataTable.scss';
 
 const MenuDataTable = () => {
   const columns = [
@@ -99,7 +100,7 @@ const MenuDataTable = () => {
     },
   ];
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div className="wrapper" style={{ height: 400, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -115,4 +116,4 @@ const MenuDataTable = () => {
   );
 };
 
-export default MenuDataTable
+export default MenuDataTable;

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import AddDrink from '../../components/addNew/AddDrink';
-import DrinksDataTable from '../../components/tables/dataGridTables/DrinksDataTable';
 import ButtonLoader from '../../components/loader/ButtonLoader';
+import DrinksDataTable from '../../components/tables/DrinksDataTable';
 
 const DrinksList = () => {
   const [open, setOpen] = useState(false);

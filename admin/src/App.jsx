@@ -1,5 +1,10 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useContext } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import Home from './views/homePage/Home';
 import Login from './views/loginPage/Login';
 import MealsList from './views/listPages/MealsList';
@@ -12,13 +17,39 @@ import DrinksList from './views/listPages/DrinksList';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { bgContext } from './context/bgColors/BgProdiver';
+import HandleData from './functions/HandleData';
+import "./styles/Dark.scss"
+import "./styles/Gray.scss"
+import "./styles/Ghost.scss"
 
 const App = () => {
   //& The credentials will work with every http request and send the token
   axios.defaults.withCredentials = true;
 
+  // Backgournd colors global variables
+  const { dark, gray, ghost } = useContext(bgContext);
+
+  // Global state variables and displaying user name
+  const { data, loading, error } = HandleData(
+    'http://localhost:5000/api/users/user/name'
+  );
+
+  // Route Protection function from accessing non-admin users
+
+  const ProtectedRoute = ({ children }) => {
+    if (!data) {
+      return <Navigate to={'/login'} />;
+    }
+    return children;
+  };
+
   return (
-    <div>
+    <div
+      className={
+        dark ? 'app dark' : gray ? 'app gray' : ghost ? 'app ghost' : 'app'
+      }
+    >
       <Router>
         <ToastContainer
           position="top-right"

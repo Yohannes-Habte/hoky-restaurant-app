@@ -1,56 +1,40 @@
 import React, { useState } from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import HandleData from '../../../functions/HandleData';
-import PageLoader from '../../loader/PageLoader';
+import axios from 'axios';
+import PageLoader from '../loader/PageLoader';
 import { Link } from 'react-router-dom';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { BsFillTrash3Fill } from 'react-icons/bs';
-import axios from 'axios';
-import ButtonLoader from '../../loader/ButtonLoader';
+import HandleData from '../../functions/HandleData';
+import ButtonLoader from '../loader/ButtonLoader';
+import "./DataTable.scss"
 
-const MealsDataTable = () => {
-  // State variables for the drinks Id in the table
+const UserDataTable = () => {
+  // State variables for fetching data
   const [indexes, setIndexes] = useState([]);
-  // Global state variables
-  // Display meals using useEffect Global Function
+
+  // Global state variables and displaying user date in the frontend using useEffect hook
   const { data, loading, error } = HandleData(
-    'http://localhost:5000/api/meals'
+    'http://localhost:5000/api/users'
   );
 
-  // State variables for the drinks Id in the table
-  const [index, setIndex] = useState();
-
-  // Delete single drink
-  const handleDelete = async () => {
-    await axios.delete(`http://localhost:3000/api/drinks/${index}`);
+  // Delete single user
+  const handleDelete = async (userId) => {
+    await axios.delete(`http://localhost:3000/api/users/${userId}`);
   };
 
   // Delete all drinks
   const handleDeleteAll = () => {
-    console.log(index);
+    console.log(indexes);
   };
 
-  // Meal header
+  // User header
   const columns = [
-    { field: '_id', headerName: 'Meal ID', width: 250 },
-    { field: 'name', headerName: 'Name', width: 130 },
-    { field: 'price', headerName: 'Price', type: 'number', width: 100 },
-    {
-      field: 'discountedPrice',
-      headerName: 'Discount',
-      type: 'number',
-      width: 70,
-    },
-    { field: 'quantity', headerName: 'Quantity', type: 'number', width: 100 },
-    { field: 'category', headerName: 'Category', width: 150 },
-
-    {
-      field: 'featured',
-      headerName: 'Featured',
-      sortable: false,
-      width: 100,
-    },
-
+    { field: '_id', headerName: 'User ID', width: 250 },
+    { field: 'firstName', headerName: 'First name', width: 150 },
+    { field: 'lastName', headerName: 'Last name', width: 150 },
+    { field: 'email', headerName: 'Email Addres', width: 250 },
+    { field: 'isAdmin', headerName: 'Status', width: 150 },
     {
       field: 'action',
       headerName: 'Action',
@@ -74,7 +58,7 @@ const MealsDataTable = () => {
   ];
 
   return (
-    <div className="table-container">
+    <div className="wrapper">
       <button onClick={handleDeleteAll} className="delete-btn">
         {loading && <ButtonLoader />}
         {loading && <span>Deleting...</span>}
@@ -122,4 +106,4 @@ const MealsDataTable = () => {
   );
 };
 
-export default MealsDataTable;
+export default UserDataTable;

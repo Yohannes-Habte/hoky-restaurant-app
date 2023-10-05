@@ -1,39 +1,52 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import HandleData from '../../functions/HandleData';
+import PageLoader from '../loader/PageLoader';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import axios from 'axios';
-import PageLoader from '../../loader/PageLoader';
 import { Link } from 'react-router-dom';
-import { FaExternalLinkAlt } from 'react-icons/fa';
+import axios from 'axios';
 import { BsFillTrash3Fill } from 'react-icons/bs';
-import HandleData from '../../../functions/HandleData';
-import ButtonLoader from '../../loader/ButtonLoader';
+import { FaExternalLinkAlt } from 'react-icons/fa';
+import { ProductsContext } from '../../context/products/ProductsProvider';
+import { PRODUCT_ACTION } from '../../context/products/ProductsReducer';
+import ButtonLoader from '../loader/ButtonLoader';
+import "./DataTable.scss"
 
-const UserDataTable = () => {
-  // State variables for fetching data
-  const [indexes, setIndexes] = useState([]);
-
-  // Global state variables and displaying user date in the frontend using useEffect hook
+const DrinksDataTable = () => {
+  // Global state variables and displaying date in the frontend using useEffect hook
+  const { dispatch } = useContext(ProductsContext);
   const { data, loading, error } = HandleData(
-    'http://localhost:5000/api/users'
+    'http://localhost:5000/api/drinks'
   );
+  // State variables for the drinks Id in the table
+  const [index, setIndex] = useState();
 
-  // Delete single user
-  const handleDelete = async (userId) => {
-    await axios.delete(`http://localhost:3000/api/users/${userId}`);
+  // Delete single drink
+  const handleDelete = async () => {
+    await axios.delete(`http://localhost:3000/api/drinks/${index}`);
   };
 
   // Delete all drinks
   const handleDeleteAll = () => {
-    console.log(indexes);
+    console.log(index);
+    dispatch({ type: PRODUCT_ACTION.DRINK_DELETED, payload: index });
   };
 
-  // User header
+  // Drink header
   const columns = [
-    { field: '_id', headerName: 'User ID', width: 250 },
-    { field: 'firstName', headerName: 'First name', width: 150 },
-    { field: 'lastName', headerName: 'Last name', width: 150 },
-    { field: 'email', headerName: 'Email Addres', width: 250 },
-    { field: 'isAdmin', headerName: 'Status', width: 150 },
+    { field: '_id', headerName: 'Drink ID', width: 250 },
+    { field: 'name', headerName: 'Name', width: 130 },
+    { field: 'price', headerName: 'Price', type: 'number', width: 100 },
+    { field: 'category', headerName: 'Category', width: 150 },
+    { field: 'brand', headerName: 'Brand', width: 150 },
+    { field: 'quantity', headerName: 'Quantity', type: 'number', width: 100 },
+
+    {
+      field: 'featured',
+      headerName: 'Featured',
+      sortable: false,
+      width: 100,
+    },
+
     {
       field: 'action',
       headerName: 'Action',
@@ -57,7 +70,7 @@ const UserDataTable = () => {
   ];
 
   return (
-    <div className="table-container">
+    <div className="wrapper">
       <button onClick={handleDeleteAll} className="delete-btn">
         {loading && <ButtonLoader />}
         {loading && <span>Deleting...</span>}
@@ -96,7 +109,7 @@ const UserDataTable = () => {
             disableRowSelectionOnClick
             //
             onRowSelectionModelChange={(ids) => {
-              setIndexes(ids);
+              setIndex(ids);
             }}
           />
         </div>
@@ -105,4 +118,4 @@ const UserDataTable = () => {
   );
 };
 
-export default UserDataTable;
+export default DrinksDataTable;

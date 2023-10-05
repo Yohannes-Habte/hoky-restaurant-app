@@ -67,15 +67,15 @@
         cursor: pointer;
 
         &:nth-child(1) {
-          background-color: #f0f8ff;
+          background-color: $dark-bg;
         }
 
         &:nth-child(2) {
-          background-color: gray;
+          background-color:$gray-bg;
         }
 
         &:nth-child(3) {
-          background-color: #000000;
+          background-color: $ghost-bg;
         }
       }
     }

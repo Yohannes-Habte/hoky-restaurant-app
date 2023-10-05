@@ -1,22 +1,23 @@
-import React, { useContext, useState } from 'react';
-import HandleData from '../../../functions/HandleData';
-import PageLoader from '../../loader/PageLoader';
+import React, { useState } from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import HandleData from '../../functions/HandleData';
+import PageLoader from '../loader/PageLoader';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import './DataTable.scss';
-import { BsFillTrash3Fill } from 'react-icons/bs';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import { ProductsContext } from '../../../context/products/ProductsProvider';
-import { PRODUCT_ACTION } from '../../../context/products/ProductsReducer';
-import ButtonLoader from '../../loader/ButtonLoader';
+import { BsFillTrash3Fill } from 'react-icons/bs';
+import axios from 'axios';
+import ButtonLoader from '../loader/ButtonLoader';
+import "./DataTable.scss"
 
-const DrinksDataTable = () => {
-  // Global state variables and displaying date in the frontend using useEffect hook
-  const { dispatch } = useContext(ProductsContext);
+const MealsDataTable = () => {
+  // State variables for the drinks Id in the table
+  const [indexes, setIndexes] = useState([]);
+  // Global state variables
+  // Display meals using useEffect Global Function
   const { data, loading, error } = HandleData(
-    'http://localhost:5000/api/drinks'
+    'http://localhost:5000/api/meals'
   );
+
   // State variables for the drinks Id in the table
   const [index, setIndex] = useState();
 
@@ -28,17 +29,21 @@ const DrinksDataTable = () => {
   // Delete all drinks
   const handleDeleteAll = () => {
     console.log(index);
-    dispatch({ type: PRODUCT_ACTION.DRINK_DELETED, payload: index });
   };
 
-  // Drink header
+  // Meal header
   const columns = [
-    { field: '_id', headerName: 'Drink ID', width: 250 },
+    { field: '_id', headerName: 'Meal ID', width: 250 },
     { field: 'name', headerName: 'Name', width: 130 },
     { field: 'price', headerName: 'Price', type: 'number', width: 100 },
-    { field: 'category', headerName: 'Category', width: 150 },
-    { field: 'brand', headerName: 'Brand', width: 150 },
+    {
+      field: 'discountedPrice',
+      headerName: 'Discount',
+      type: 'number',
+      width: 70,
+    },
     { field: 'quantity', headerName: 'Quantity', type: 'number', width: 100 },
+    { field: 'category', headerName: 'Category', width: 150 },
 
     {
       field: 'featured',
@@ -70,7 +75,7 @@ const DrinksDataTable = () => {
   ];
 
   return (
-    <div className="table-container">
+    <div className="wrapper">
       <button onClick={handleDeleteAll} className="delete-btn">
         {loading && <ButtonLoader />}
         {loading && <span>Deleting...</span>}
@@ -109,7 +114,7 @@ const DrinksDataTable = () => {
             disableRowSelectionOnClick
             //
             onRowSelectionModelChange={(ids) => {
-              setIndex(ids);
+              setIndexes(ids);
             }}
           />
         </div>
@@ -118,4 +123,4 @@ const DrinksDataTable = () => {
   );
 };
 
-export default DrinksDataTable;
+export default MealsDataTable;

@@ -1,49 +1,45 @@
 import React, { useState } from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import HandleData from '../../../functions/HandleData';
-import PageLoader from '../../loader/PageLoader';
+import HandleData from '../../functions/HandleData';
+import PageLoader from '../loader/PageLoader';
 import { Link } from 'react-router-dom';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { BsFillTrash3Fill } from 'react-icons/bs';
 import axios from 'axios';
-import ButtonLoader from '../../loader/ButtonLoader';
+import ButtonLoader from '../loader/ButtonLoader';
+import "./DataTable.scss"
 
-const ReservationDataTable = () => {
+const OrdersDataTable = () => {
   // State variables for the drinks Id in the table
-  const [index, setIndex] = useState();
-
+  const [indexes, setIndexes] = useState([]);
   // Global state variables
   // Display meals using useEffect Global Function
   const { data, loading, error } = HandleData(
     'http://localhost:5000/api/reservations'
   );
 
-  // Delete single reservation
-  const handleDelete = async (userId) => {
-    await axios.delete(`http://localhost:3000/api/users/${userId}`);
+  // Delete single drink
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:3000/api/drinks/${id}`);
   };
 
-  // Delete all reservations
+  // Delete all drinks
   const handleDeleteAll = () => {
-    console.log(index);
+    console.log(indexes);
   };
 
-  // Table header
   const columns = [
-    { field: '_id', headerName: 'Reservation ID', width: 200 },
+    { field: '_id', headerName: 'ID', width: 250 },
     { field: 'firstName', headerName: 'First name', width: 130 },
     { field: 'lastName', headerName: 'Last name', width: 130 },
-    { field: 'email', headerName: 'Email Addres', width: 200 },
-    { field: 'phone', headerName: 'Phone Number', width: 130 },
-    { field: 'date', headerName: 'Date', width: 100 },
-    { field: 'time', headerName: 'Time', width: 70 },
+    { field: 'email', headerName: 'Email Addres', width: 130 },
+    { field: 'phone', headerName: 'Phone Number', width: 150 },
     {
-      field: 'persons',
-      headerName: 'Persons',
+      field: 'age',
+      headerName: 'Age',
       type: 'number',
-      width: 50,
+      width: 90,
     },
-
     {
       field: 'action',
       headerName: 'Action',
@@ -67,7 +63,7 @@ const ReservationDataTable = () => {
   ];
 
   return (
-    <div className="table-container">
+    <div className="wrapper">
       <button onClick={handleDeleteAll} className="delete-btn">
         {loading && <ButtonLoader />}
         {loading && <span>Deleting...</span>}
@@ -106,7 +102,7 @@ const ReservationDataTable = () => {
             disableRowSelectionOnClick
             //
             onRowSelectionModelChange={(ids) => {
-              setIndex(ids);
+              setIndexes(ids);
             }}
           />
         </div>
@@ -115,4 +111,4 @@ const ReservationDataTable = () => {
   );
 };
 
-export default ReservationDataTable;
+export default OrdersDataTable;

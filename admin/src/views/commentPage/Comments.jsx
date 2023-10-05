@@ -60,7 +60,7 @@ const Comments = () => {
                     </p>
 
                     <p className="paragraph">
-                      Please email me to{' '}
+                     You can send email to{' '}
                       <strong className="email">{comment.email}</strong>
                     </p>
 

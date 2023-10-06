@@ -25,7 +25,7 @@ mealRouter.get('/categories/meats', getMeatCategory);
 mealRouter.get('/categories/vegan', getVeganCategory);
 mealRouter.get('/categories/mixed', getMixedCategory);
 mealRouter.get('/categories/east-africa-dishes', getEastAfrocaCategory);
-mealRouter.get('/:id', adminAuth, getSingleMeal);
+mealRouter.get('/:id', getSingleMeal);
 mealRouter.get('/count/meals');
 mealRouter.delete('/:id', adminAuth, deleteMeal);
 mealRouter.delete('/');

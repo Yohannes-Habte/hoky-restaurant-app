@@ -1,4 +1,9 @@
-// Dish with variety of stews
+import {
+  BsCartCheck,
+  BsClockHistory,
+  BsFillCreditCardFill,
+} from 'react-icons/bs';
+import { FaShippingFast } from 'react-icons/fa'; // Dish with variety of stews
 import varietyDishes from '../assets/dishes.jpg';
 import mixed_5 from '../assets/eri-ethio-mixed5.jpeg';
 import restaurantLocation from '../assets/restaurant.jpeg';
@@ -21,6 +26,31 @@ export const responsive = {
     slidesToSlide: 1, // optional, default to 1.
   },
 };
+
+// Home page
+
+export const serviceInfo = [
+  {
+    icon: <FaShippingFast size={30} color="#8cb4f5" />,
+    heading: 'Free Shipping',
+    text: 'We offer free shipping on special Dishes',
+  },
+  {
+    icon: <BsFillCreditCardFill size={30} color="#f7d272" />,
+    heading: 'Secure Payment',
+    text: 'Make secure payment for your meals.',
+  },
+  {
+    icon: <BsCartCheck size={30} color="#fa82ea" />,
+    heading: 'Healthy Organic Meals',
+    text: 'We sell foods only organic healthy ingredients.',
+  },
+  {
+    icon: <BsClockHistory size={30} color="#82fa9e" />,
+    heading: '24/7 Support',
+    text: 'Get access to support from our exprt support team.',
+  },
+];
 
 // About Page
 export const aboutHoky = [

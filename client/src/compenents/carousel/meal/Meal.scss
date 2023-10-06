@@ -49,3 +49,7 @@
 .addToCart-btn {
   @include button;
 }
+
+.empty-stock-btn {
+  background-color: $stock;
+}

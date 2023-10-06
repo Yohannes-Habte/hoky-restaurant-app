@@ -47,7 +47,7 @@ const UserCartProvider = ({ children }) => {
         user: state.user,
         isLoggedIn: state.isLoggedIn,
         cart: state.cart,
-        cartItems: state.cart.cartItems,
+        cartMeals: state.cart.cartMeals,
         shippingAddress: state.cart.shippingAddress,
         paymentMethod: state.cart.paymentMethod,
         loading: state.loading,

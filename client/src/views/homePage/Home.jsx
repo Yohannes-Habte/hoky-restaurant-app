@@ -1,15 +1,15 @@
 import React from 'react';
 import './Home.scss';
 import Slider from '../../compenents/dishAdvertisement/MealAdvert';
-import HomeInfoBox from '../../compenents/homeInfo/HomeInfoBox';
 import { Helmet } from 'react-helmet-async';
-import CarouselDishItems from '../../compenents/carousel/carouselItem/CarouselDishItems';
-import EriEthioMeatMeals from '../../compenents/carousel/dishes/EriEthioMeatMeals';
-import EriEthioVeganMeals from '../../compenents/carousel/dishes/EriEthioVeganMeals';
-import EriEthioMixedMeals from '../../compenents/carousel/dishes/EriEthioMixedMeals';
-import EastAfricanMeals from '../../compenents/carousel/dishes/EastAfricanMeals';
+import EriEthioMeatMeals from '../../compenents/carousel/mealCategories/EriEthioMeatMeals';
+import EriEthioVeganMeals from '../../compenents/carousel/mealCategories/EriEthioVeganMeals';
+import EriEthioMixedMeals from '../../compenents/carousel/mealCategories/EriEthioMixedMeals';
+import EastAfricanMeals from '../../compenents/carousel/mealCategories/EastAfricanMeals';
 import SectionHeader from '../../compenents/sectionHeader/SectionHeader';
 import Fetch from '../../globalFunction/GlobalFunction';
+import Meal from '../../compenents/carousel/meal/Meal';
+import HomeInfoBox from '../../compenents/homeInfo/HomeInfoBox';
 
 // Page heading component for the Home.jsx
 /** 
@@ -42,48 +42,28 @@ const Home = () => {
   // Eritrean and Ethiopian favourite meat dishes from the backend
   const eriEthioMeatDishes = data.map((dish) => (
     <div key={dish._id}>
-      <CarouselDishItems
-        name={dish.name}
-        price={dish.price}
-        description={dish.description}
-        imageurl={dish.image}
-      />
+      <Meal dish={dish} />
     </div>
   ));
 
   // Eritrean and Ethiopian favourite Vegan dishes from the backend
   const eriEthioVeganDishes = veganData.map((dish) => (
     <div key={dish._id}>
-      <CarouselDishItems
-        name={dish.name}
-        price={dish.price}
-        description={dish.description}
-        imageurl={dish.image}
-      />
+      <Meal dish={dish} />
     </div>
   ));
 
   // Eritrean and Ethiopian favourite Vegan dishes from the backend
   const eriEthioMixedDishes = mixedMealsData.map((dish) => (
     <div key={dish._id}>
-      <CarouselDishItems
-        name={dish.name}
-        price={dish.price}
-        description={dish.description}
-        imageurl={dish.image}
-      />
+      <Meal dish={dish} />
     </div>
   ));
 
   // East African dishes from the backend
   const eastAfricanDishes = eastAfricaDishes.map((dish) => (
     <div key={dish._id}>
-      <CarouselDishItems
-        name={dish.name}
-        price={dish.price}
-        description={dish.description}
-        imageurl={dish.image}
-      />
+      <Meal dish={dish} />
     </div>
   ));
 

@@ -1,0 +1,159 @@
+@import '../../styles/Variables.scss';
+@import '../../styles/Mixins.scss';
+
+.cart-page {
+  width: 100%;
+  min-height: 100vh;
+
+  .cart-container {
+    width: $laptop;
+    margin: 1rem auto;
+
+    .cart-title {
+      @include title;
+    }
+
+    .paragraph {
+      @include paragraph;
+    }
+
+    // Empty cart
+    .empty-cart {
+      @include shadow3;
+      .subTitle {
+        @include subTitle;
+      }
+
+      .navigate-home-page {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        @include paragraph;
+        color: blue;
+
+        &:hover {
+          color: $red;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    // Order meal styling
+    .orders-wrapper {
+      @include shadow3;
+      margin: 1rem 0;
+
+      .subTitle {
+        @include subTitle;
+        font-size: 1.6rem;
+      }
+
+      .ordered-dishes-and-total-price-container {
+        display: grid;
+        grid-template-columns: 70% 30%;
+        column-gap: 1rem;
+        row-gap: 1rem;
+        padding: 0 1rem;
+
+        .ordered-meals-container {
+          .each-ordered-meal-info {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0.2rem;
+            @include shadow3;
+            padding: 0.5rem 0;
+            height: 8rem;
+            margin-top: 0.5rem;
+
+            // Meal image and name styling
+            .image-name-container {
+              flex: 4;
+              display: flex;
+              align-items: center;
+
+              .image-container {
+                flex: 2;
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                .image {
+                  width: 7rem;
+                  height: 7rem;
+                  object-fit: cover;
+                  border-radius: 50%;
+                }
+              }
+
+              .meal-name {
+                flex: 2;
+                .link {
+                  color: $blue;
+                  &:hover {
+                    text-decoration: underline;
+                    color: $red;
+                  }
+                }
+              }
+            }
+            // Quantity management styling
+            .buttons-quantity-container {
+              flex: 3;
+              width: 30%;
+              .quantity-btn {
+                @include btn2;
+              }
+              .quantity {
+                padding: 0 0.5rem 0 0.3rem;
+              }
+            }
+
+            // Meal image and name
+            .meal-price-container {
+              flex: 1;
+              width: 20%;
+              font-weight: $aafw;
+
+              .price {
+                color: $green;
+              }
+            }
+            // Trash icon styling
+            .trash-icon-container {
+              flex: 1;
+              .icon {
+                color: $red;
+                padding-top: 0.2rem;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+
+        // Total ordered meals and total price
+
+        .total-meals-and-price {
+          border-radius: 0.2rem;
+          box-shadow: 0 0 1px;
+          padding: 0.5rem 1rem;
+          background-color: $aside-bg;
+          height: fit-content;
+
+          .total-order {
+            line-height: 2rem;
+          }
+
+          .price {
+            font-size: $afs;
+          }
+
+          .checkout-btn {
+            @include button;
+          }
+        }
+      }
+    }
+  }
+}

@@ -118,7 +118,7 @@ const Header = () => {
           </li>
 
           <li onClick={hideMenu} className="navbar-item">
-            <NavLink to={'/gallery'} className={activeLink}>
+            <NavLink to={'/meals'} className={activeLink}>
               Gallery
             </NavLink>
           </li>

@@ -36,7 +36,7 @@ const Meals = () => {
           <div className="meals">
             {data.map((meal) => {
               return (
-                <figure className="image-conatiner">
+                <figure key={meal._id} className="image-conatiner">
                   <img className="image" src={meal.image} alt={meal.name} />
                 </figure>
               );

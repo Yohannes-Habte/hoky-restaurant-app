@@ -17,7 +17,8 @@ import { USER_CART_ACTION } from './context/userCart/UserCartReducer';
 import Profile from './views/ProfilePage/Profile';
 import Reservation from './views/reservation Page/Reservation';
 import Menu from './views/menuPage/Menu';
-
+import Cart from './views/cartPage/Cart';
+import SingleMeal from './views/mealPage/SingleMeal';
 
 const App = () => {
   // Global state variables
@@ -63,9 +64,11 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/menu" element={<Menu />} />
-          <Route path="/Gallery" element={<Meals />} />
+          <Route path="/meals" element={<Meals />} />
+          <Route path="/meals/:id" element={<SingleMeal />} />
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />

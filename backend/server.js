@@ -15,6 +15,7 @@ import paymentRouter from './routes/paymentRoutes.js';
 import commentRouter from './routes/commentRoutes.js';
 import globalErrorHandler from './middleware.js/globalErrorHandler.js';
 import formRouter from './routes/formRoutes.js';
+import orderRouter from './routes/orderRoute.js';
 
 
 
@@ -54,6 +55,7 @@ app.use('/api/meals', mealRouter);
 app.use('/api/drinks', drinkRouter);
 app.use('/api/reservations', reservationRouter);
 app.use('/api/payments', paymentRouter);
+app.use('/api/orders', orderRouter);
 app.use('/api/comments', commentRouter);
 app.use('/api/forms', formRouter);
 

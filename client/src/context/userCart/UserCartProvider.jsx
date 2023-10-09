@@ -10,7 +10,7 @@ const initialState = {
   isLoggedIn: false,
 
   cart: {
-    cartMeals: localStorage.getItem('cartMeals')
+    orderMeals: localStorage.getItem('cartMeals')
       ? JSON.parse(localStorage.getItem('cartMeals'))
       : [],
 
@@ -18,11 +18,7 @@ const initialState = {
       ? JSON.parse(localStorage.getItem('user'))
       : null,
 
-    shippingAddress: localStorage.getItem('shippingAddress')
-      ? JSON.parse(localStorage.getItem('shippingAddress'))
-      : {},
-
-    //& Since it is string, you do not need "JSON.parse"
+    // Since it is string, you do not need "JSON.parse"
     paymentMethod: localStorage.getItem('paymentMethod')
       ? localStorage.getItem('paymentMethod')
       : '',
@@ -47,8 +43,7 @@ const UserCartProvider = ({ children }) => {
         user: state.user,
         isLoggedIn: state.isLoggedIn,
         cart: state.cart,
-        cartMeals: state.cart.cartMeals,
-        shippingAddress: state.cart.shippingAddress,
+        orderMeals: state.cart.orderMeals,
         paymentMethod: state.cart.paymentMethod,
         loading: state.loading,
         error: state.error,

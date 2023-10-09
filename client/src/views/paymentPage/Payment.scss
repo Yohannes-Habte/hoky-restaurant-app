@@ -1,0 +1,44 @@
+@import '../../styles/Variables.scss';
+@import '../../styles/Mixins.scss';
+
+.payment-page {
+  width: 100%;
+  min-height: 100vh;
+
+  .payment-container {
+    width: $laptop;
+    margin: 1rem auto;
+
+    .payment-title {
+      @include title;
+    }
+
+    .payment-form {
+      width: 50%;
+      margin: 1rem auto;
+      @include shadow3;
+      background-color: $section-bg;
+
+      .payment-input {
+        display: flex;
+        gap: 0.5rem;
+
+        & input {
+          width: 1.2rem;
+          height: 3rem;
+          border-radius: 50%;
+        }
+
+        & label {
+          padding: 0.7rem 0;
+          font-size: $afs;
+          font-weight: bold;
+        }
+      }
+
+      .payment-btn {
+        @include button;
+      }
+    }
+  }
+}

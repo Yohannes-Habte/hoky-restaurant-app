@@ -19,6 +19,10 @@ import Reservation from './views/reservation Page/Reservation';
 import Menu from './views/menuPage/Menu';
 import Cart from './views/cartPage/Cart';
 import SingleMeal from './views/mealPage/SingleMeal';
+import Payment from './views/paymentPage/Payment';
+import Order from './views/orderPage/Order';
+import PlaceOrder from './views/placeorderPage/PlaceOrder';
+
 
 const App = () => {
   // Global state variables
@@ -66,9 +70,12 @@ const App = () => {
           <Route path="/menu" element={<Menu />} />
           <Route path="/meals" element={<Meals />} />
           <Route path="/meals/:id" element={<SingleMeal />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/place-order" element={<PlaceOrder />} />
+          <Route path="/orders/:id" element={<Order />} />
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />

@@ -86,7 +86,7 @@ const Login = () => {
       //& 1. Save user in the local storage
       localStorage.setItem('user', JSON.stringify(data));
       resetVariables();
-      navigate('/Gallery');
+      navigate('/');
       return toast.success("You have successfully logged in!")
     } catch (err) {
       console.log(err);

@@ -29,6 +29,11 @@ export const USER_CART_ACTION = {
   SHIPPING_ADDRESS: 'SHIPPING_ADDRESS',
   PAYMENT_METHOD: 'PAYMENT_METHOD',
   CLEAR_CART: 'CLEAR_CART',
+
+  // Placing an order
+  PLACE_ORDER_REQUEST: 'PLACE_ORDER_REQUEST',
+  PLACE_ORDER_SUCCESS: 'PLACE_ORDER_SUCCESS',
+  PLACE_ORDER_FAIL: 'PLACE_ORDER_FAIL',
 };
 
 // Reducer Function
@@ -83,43 +88,36 @@ const UserCartReducer = (state, action) => {
       // Setp 1: Create newMeal variable that has to be added to the cart
       const newMeal = action.payload;
 
-      // Setp 2: Find existing meal (existingMeal) in the cartMeals and compare with the new meal (newMeal).
-      const existingMeal = state.cart.cartMeals.find(
+      // Setp 2: Find existing meal (existingMeal) in the orderMeals and compare with the new meal (newMeal).
+      const existingMeal = state.cart.orderMeals.find(
         (meal) => meal._id === newMeal._id
       );
 
       /*
         Setp 3:
           - If the (existingMeal) is the same as (newMeal), update the (newMeal) using map function.
-          - If the meal does not exist in the cartMeals, then just  add the newMeal to the cart [...state.cart.cartMeals, newMeal]; 
+          - If the meal does not exist in the orderMeals, then just  add the newMeal to the cart [...state.cart.orderMeals, newMeal]; 
        */
-      const cartMeals = existingMeal
-        ? state.cart.cartMeals.map((meal) =>
+      const orderMeals = existingMeal
+        ? state.cart.orderMeals.map((meal) =>
             meal._id === existingMeal._id ? newMeal : meal
           )
-        : [...state.cart.cartMeals, newMeal];
+        : [...state.cart.orderMeals, newMeal];
 
-      localStorage.setItem('cartMeals', JSON.stringify(cartMeals));
+      localStorage.setItem('orderMeals', JSON.stringify(orderMeals));
 
-      return { ...state, cart: { ...state.cart, cartMeals } };
+      return { ...state, cart: { ...state.cart, orderMeals } };
 
     // Remove Meal from Cart
     case USER_CART_ACTION.REMOVE_MEAL_FROM_CART: {
-      // Filter the meal from the cartMeals
-      const cartMeals = state.cart.cartMeals.filter(
+      // Filter the meal from the orderMeals
+      const orderMeals = state.cart.orderMeals.filter(
         (meal) => meal._id !== action.payload._id
       );
 
-      localStorage.setItem('cartMeals', JSON.stringify(cartMeals));
-      return { ...state, cart: { ...state.cart, cartMeals } };
+      localStorage.setItem('orderMeals', JSON.stringify(orderMeals));
+      return { ...state, cart: { ...state.cart, orderMeals } };
     }
-
-    // Shipping Address
-    case USER_CART_ACTION.SHIPPING_ADDRESS:
-      return {
-        ...state,
-        cart: { ...state.cart, shippingAddress: action.payload },
-      };
 
     // Payment Method
     case USER_CART_ACTION.PAYMENT_METHOD:
@@ -127,6 +125,18 @@ const UserCartReducer = (state, action) => {
         ...state,
         cart: { ...state.cart, paymentMethod: action.payload },
       };
+
+    // Placing an order
+    case USER_CART_ACTION.PLACE_ORDER_REQUEST:
+      return { ...state.cart, loading: true, error: '' };
+    case USER_CART_ACTION.PLACE_ORDER_SUCCESS:
+      return { ...state.cart, loading: false, error: '' };
+    case USER_CART_ACTION.PLACE_ORDER_FAIL:
+      return { ...state.cart, loading: false, error: '' };
+
+    // After you place an order, make the cart meals (orderMeals) empty
+    case USER_CART_ACTION.CLEAR_CART:
+      return { ...state, cart: { ...state.cart, orderMealss: [] } };
 
     default:
       return state;

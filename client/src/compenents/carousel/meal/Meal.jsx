@@ -13,12 +13,12 @@ import './Meal.scss';
 //& Step 2: Get the data from the Home.jsx through Distructuring the object
 const Meal = ({ dish }) => {
   // Global state variables
-  const { cartMeals, dispatch, loading, error } = useContext(UserCartContext);
+  const { orderMeals, dispatch, loading, error } = useContext(UserCartContext);
 
   // Add to cart from the landing page
   const addToCart = async () => {
     try {
-      const existingMeal = cartMeals.find((item) => item._id === dish._id);
+      const existingMeal = orderMeals.find((item) => item._id === dish._id);
       const quantity = existingMeal ? existingMeal.quantity + 1 : 1;
       const { data } = await axios.get(
         process.env.REACT_APP_BACKEND_URL + `/api/meals/${dish._id}`

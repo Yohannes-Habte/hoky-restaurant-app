@@ -18,23 +18,23 @@ const SingleMeal = () => {
   const location = useLocation();
   const mealId = location.pathname.split('/')[2];
 
-  // Global state variables from the global function to display specific meal 
+  // Global state variables from the global function to display specific meal
   const { data: meal, loading, error } = Fetch(`/api/meals/${mealId}`);
 
   // Global state variables from the user cart context (UserCartContext)
-  const { cartMeals, dispatch } = useContext(UserCartContext);
+  const { orderMeals, dispatch } = useContext(UserCartContext);
 
   // Function to add to cart
   const addToCart = async () => {
     try {
-      const existingMeal = cartMeals.find((item) => item._id === meal._id);
+      const existingMeal = orderMeals.find((item) => item._id === meal._id);
       const quantity = existingMeal ? existingMeal.quantity + 1 : 1;
       const { data } = await axios.get(
         process.env.REACT_APP_BACKEND_URL + `/api/meals/${meal._id}`
       );
       if (meal.quantity < quantity) {
-        window.alert(
-          'Sorry, this is the last meal in the stock. Please contact us to meet your needs!'
+        toast.error(
+          'Sorry, There is no additional meal in the stock. Please contact us to meet your needs!'
         );
         return;
       } else {

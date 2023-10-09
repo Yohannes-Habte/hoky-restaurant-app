@@ -1,0 +1,131 @@
+@import '../../styles/Variables.scss';
+@import '../../styles/Mixins.scss';
+
+.place-order-page {
+  width: 100%;
+  min-height: 100vh;
+  margin: auto;
+
+  .place-order-container {
+    width: $laptop;
+    margin: 1rem auto;
+
+    .order-title {
+      @include title;
+    }
+
+    .order-wrapper {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      column-gap: 1rem;
+      row-gap: 1rem;
+
+      .order-infos {
+        .ordered-meals {
+          @include shadow;
+          position: relative;
+
+          .subTitle {
+            @include subTitle;
+          }
+
+          .edit-order {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: $editbg-bg;
+            @include btn2;
+            text-align: center;
+            color: $blue;
+          }
+          .meals-info {
+            .meal-wrapper {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              @include shadow3;
+              place-items: center;
+
+              .image-container {
+                display: flex;
+                gap: 1rem;
+                height: 6rem;
+
+                .image {
+                  width: 10rem;
+                  object-fit: cover;
+                  border-radius: 0.2rem;
+                  margin-bottom: 0.3rem;
+                }
+              }
+
+              .subTitle {
+                @include subTitle;
+                padding: 0;
+              }
+
+              .paragraph {
+                @include paragraph;
+              }
+            }
+          }
+        }
+
+        .payment-method {
+          @include shadow3;
+          position: relative;
+
+          .subTitle {
+            @include subTitle;
+          }
+          .paragraph {
+            @include paragraph;
+          }
+
+          .edit-payment {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: $editbg-bg;
+            @include btn2;
+            text-align: center;
+            color: $blue;
+          }
+        }
+      }
+
+      // Order summary
+      .order-summary {
+        @include shadow3;
+        height: max-content;
+
+        .sutTitle {
+          @include subTitle;
+        }
+
+        .order-summary-details {
+          .summary-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .paragraph {
+              @include paragraph;
+            }
+          }
+
+          .total {
+            font-weight: $aafw;
+          }
+
+          .horizontal-line {
+            width: 100%;
+          }
+        }
+        .order-btn {
+          @include button;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

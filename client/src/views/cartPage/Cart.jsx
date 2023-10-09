@@ -17,29 +17,28 @@ const Cart = () => {
   const navigate = useNavigate();
 
   // Global state variables
-  const { dispatch, cartMeals, user } = useContext(UserCartContext);
+  const { dispatch, orderMeals, user } = useContext(UserCartContext);
 
-  // Increating and/or decreating meal quantity in the cart
-  const updateCart = async (meal, quantity) => {
+  // Increating and/or decreating for specific meal quantity in the cart
+  const updateCart = async (meal, mealQuantity) => {
     // Find the meal from the backend
     const { data } = await axios.get(
       process.env.REACT_APP_BACKEND_URL + `/api/meals/${meal._id}`
     );
-    if (data.quantity < quantity) {
-      window.alert(
+    if (data.quantity < mealQuantity) {
+      alert(
         'Sorry, There is no additional meal in the stock. Please contact us to meet your needs!'
       );
-      return;
     } else {
       dispatch({
         type: USER_CART_ACTION.ADD_MEAL_TO_CART,
-        payload: { ...meal, quantity },
+        payload: { ...meal, mealQuantity },
       });
     }
   };
 
   // Function to remove product from the cart
-  const removeProduct = (meal) => {
+  const removeMeal = (meal) => {
     dispatch({
       type: USER_CART_ACTION.REMOVE_MEAL_FROM_CART,
       payload: meal,
@@ -47,12 +46,12 @@ const Cart = () => {
   };
 
   // Function that check user login status
-  const checkoutHandler = async () => {
+  const checkUserLogin = async () => {
     if (!user) {
       toast.error('Please login to proceed to next step!');
       navigate('/login');
     } else {
-      navigate('/shipping');
+      navigate('/payment');
     }
   };
 
@@ -73,7 +72,7 @@ const Cart = () => {
         </p>
 
         {/* Empty cart */}
-        {cartMeals.length === 0 && (
+        {orderMeals.length === 0 && (
           <article className="empty-cart">
             <h3 className="subTitle">
               Cart is empty! Order Your Favourite Healthy Organic Foods
@@ -88,22 +87,24 @@ const Cart = () => {
         )}
 
         {/* When cart is not empty */}
-        {cartMeals.length > 0 && (
+        {orderMeals.length > 0 && (
           <article className="orders-wrapper">
             <h3 className="subTitle"> Your Favourite Ordered Dishes </h3>
             <div className="ordered-dishes-and-total-price-container">
               <div className="ordered-meals-container">
-                {cartMeals.map((dish) => {
+                {orderMeals.map((dish) => {
                   return (
                     <div key={dish._id} className="each-ordered-meal-info">
                       {/* Meal image and name */}
                       <div className="image-name-container">
                         <figure className="image-container">
-                          <img
-                            src={dish.image}
-                            alt={dish.name}
-                            className="image"
-                          />
+                          <NavLink to={`/meals/${dish._id}`} className={'link'}>
+                            <img
+                              src={dish.image}
+                              alt={dish.name}
+                              className="image"
+                            />
+                          </NavLink>
                         </figure>
                         <div className="meal-name">
                           <NavLink to={`/meals/${dish._id}`} className={'link'}>
@@ -131,7 +132,7 @@ const Cart = () => {
                         {/* Increasing meal quantity */}
                         <button
                           onClick={() => updateCart(dish, dish.quantity + 1)}
-                          disabled={dish.quantity === dish.countInStock}
+                          disabled={dish.mealQuantity === dish.quantity}
                           className="quantity-btn"
                         >
                           +
@@ -143,10 +144,10 @@ const Cart = () => {
                         <span className="price">${dish.price}</span>{' '}
                       </div>
 
-                      {/* Delete a product from the cart */}
+                      {/* Delete a meal from the cart */}
                       <div className="trash-icon-container">
                         <button
-                          onClick={() => removeProduct(dish)}
+                          onClick={() => removeMeal(dish)}
                           className="trash-btn"
                         >
                           <FaTrash className="icon" />
@@ -161,25 +162,25 @@ const Cart = () => {
               <aside className="total-meals-and-price">
                 <h3 className="total-order">
                   Total Ordered Dishes:{' '}
-                  {cartMeals.reduce((acc, curr) => acc + curr.quantity, 0)}{' '}
+                  {orderMeals.reduce((acc, curr) => acc + curr.quantity, 0)}{' '}
                   Dishes
                 </h3>
                 <p className="price">
                   <strong>
                     Price: $
-                    {cartMeals.reduce(
+                    {orderMeals.reduce(
                       (acc, curr) => acc + curr.price * curr.quantity,
                       0
                     )}
                   </strong>
                 </p>
                 <button
-                  onClick={checkoutHandler}
+                  onClick={checkUserLogin}
                   type="button"
-                  disabled={cartMeals.length < 2}
+                  disabled={orderMeals.length < 1}
                   className="checkout-btn"
                 >
-                  Proceed to Checkout
+                  Next
                 </button>
               </aside>
             </div>

@@ -18,7 +18,6 @@ import formRouter from './routes/formRoutes.js';
 import orderRouter from './routes/orderRoute.js';
 
 
-
 // Express app
 const app = express();
 
@@ -32,6 +31,11 @@ app.use(
     credentials: true, // to send token from the backend to the frontend
   })
 );
+
+// Create API for the paypal
+app.get('/api/keys/paypal', (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID || 'sb'); // sb stands for Sandbox
+});
 
 // Security key holder
 dotenv.config();
@@ -54,7 +58,7 @@ app.use('/api/users', userRouter);
 app.use('/api/meals', mealRouter);
 app.use('/api/drinks', drinkRouter);
 app.use('/api/reservations', reservationRouter);
-app.use('/api/payments', paymentRouter);
+app.use('/api/payment', paymentRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/comments', commentRouter);
 app.use('/api/forms', formRouter);

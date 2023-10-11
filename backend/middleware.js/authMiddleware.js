@@ -15,7 +15,6 @@ export const userAuth = async (req, res, next) => {
 
     // Verify the token
     const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('User is =', verifiedToken);
 
     // Get user ID from the token
     const user = await User.findById(verifiedToken.id).select('-password');

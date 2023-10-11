@@ -1,7 +1,7 @@
 @import '../../styles/Variables.scss';
 @import '../../styles/Mixins.scss';
 
-// Bobile styling
+
 .header {
   width: 100%;
   background-color: $header-bg;
@@ -9,7 +9,6 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem 1rem;
- 
 
   .logo-container {
     display: flex;
@@ -40,21 +39,18 @@
 
   // Navbar styling
   .navbar-container {
- 
-
     .navbar-items {
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 1rem;
-      
 
       .navbar-item {
         padding: 0.6rem;
         border-bottom: 1px solid #f0b8e1;
 
         &:hover {
-          background-color: #f0b8e1 ;
+          background-color: #f0b8e1;
         }
 
         .active {
@@ -140,6 +136,8 @@
           position: absolute;
           top: -0.8rem;
           right: 0;
+          color: $red;
+          font-weight: $lfw;
         }
       }
 
@@ -152,7 +150,8 @@
           position: absolute;
           top: -0.8rem;
           right: 0;
-          color: #ffffff;
+          color: $red;
+          font-weight: $lfw;
         }
       }
     }
@@ -162,4 +161,3 @@
     }
   }
 }
-

@@ -27,3 +27,22 @@ export const placeOrder = async (req, res, next) => {
     next(createError(404, 'The meal Order is not placed. Please try again?'));
   }
 };
+
+//===========================================================
+// The user and admin have the mandate to get an order
+//===========================================================
+export const getOneOrder = async (req, res, next) => {
+  try {
+    const order = await MealOrder.findById(req.params.id);
+    if (order) {
+      res.status(200).send(order);
+    } else {
+      return next(createError(400, 'There is no meal. Please try again!'));
+    }
+  } catch (error) {
+    console.log(error);
+    next(
+      createError(404, 'You cannot access the ordered meal. Please try again?')
+    );
+  }
+};

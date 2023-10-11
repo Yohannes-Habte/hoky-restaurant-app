@@ -98,9 +98,9 @@ const PlaceOrder = () => {
         <div className="order-wrapper">
           {/* Order Preview  */}
           <div className="order-infos">
-            {/* Shopping Items */}
+            {/* Meals to be ordered */}
             <article className="ordered-meals">
-              <h3 className="subTitle">Shopping Items</h3>
+              <h3 className="subTitle">Ordered Meals</h3>
               <NavLink className={'edit-order'} to={'/cart'}>
                 Edit
               </NavLink>

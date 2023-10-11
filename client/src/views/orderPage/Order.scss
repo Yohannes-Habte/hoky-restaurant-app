@@ -4,82 +4,123 @@
 .order-display-page {
   width: 100%;
   min-height: 100vh;
+  margin: auto;
 
   .order-display-container {
     width: $laptop;
     margin: 1rem auto;
-    
+
     .order-title {
       @include title;
     }
 
-    .order-details {
+    .order-wrapper {
       display: grid;
       grid-template-columns: 60% 40%;
       column-gap: 1rem;
       row-gap: 1rem;
 
-      .ordered-items-address-payment {
-        .ordered-items {
-          margin: 1rem 0;
-          padding: 0.5rem 1rem;
-          box-shadow: 0 0 2px;
-          border-radius: 0.2rem;
-          .items-info {
-            .item-container {
+      .ordered-meals-infos {
+        .ordered-meals {
+          @include shadow;
+          position: relative;
+
+          .subTitle {
+            @include subTitle;
+          }
+
+          .order-data {
+            .order-wrapper {
               display: grid;
               grid-template-columns: repeat(4, 1fr);
+              @include shadow3;
+              place-items: center;
 
-              .image-name {
+              .image-container {
                 display: flex;
                 gap: 1rem;
-                width: 30px;
+                height: 6rem;
+
                 .image {
-                  width: 100%;
+                  width: 10rem;
                   object-fit: cover;
                   border-radius: 0.2rem;
                   margin-bottom: 0.3rem;
                 }
               }
+
+              .subTitle {
+                @include subTitle;
+                padding: 0;
+              }
+
+              .paragraph {
+                @include paragraph;
+              }
             }
           }
         }
-        .shipping-address {
-          margin: 1rem 0;
-          padding: 0.5rem 1rem;
-          box-shadow: 0 0 2px;
-          border-radius: 0.2rem;
-        }
+
+        // Payment method styling
+
         .payment-method {
-          margin: 1rem 0;
-          padding: 0.5rem 1rem;
-          box-shadow: 0 0 2px;
-          border-radius: 0.2rem;
+          @include shadow3;
+          position: relative;
+
+          .subTitle {
+            @include subTitle;
+          }
+          .paragraph {
+            @include paragraph;
+          }
+
+          .not-yet-paid {
+            @include paragraph;
+            color: $red;
+          }
+
+          .not-yet-delivered {
+            @include paragraph;
+            color: $red;
+          }
         }
       }
 
+      // Order summary
       .order-summary {
-        margin: 1rem 0;
-        padding: 0.5rem 1rem;
-        box-shadow: 0 0 2px;
-        border-radius: 0.2rem;
+        @include shadow3;
         height: max-content;
 
+        .sutTitle {
+          @include subTitle;
+        }
+
         .order-summary-details {
-          .total-of-items {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+          .summary-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .paragraph {
+              @include paragraph;
+            }
+          }
+
+          .total {
+            font-weight: $aafw;
+          }
+
+          .horizontal-line {
+            width: 100%;
           }
         }
         .order-btn {
           @include button;
-          margin-bottom: 2rem;
+          width: 100%;
         }
 
-        .further-info {
-          .text-info {
-            padding: 0.5rem 0;
-          }
+        .stripe-btn {
+          @include button;
         }
       }
     }

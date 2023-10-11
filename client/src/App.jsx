@@ -22,6 +22,8 @@ import SingleMeal from './views/mealPage/SingleMeal';
 import Payment from './views/paymentPage/Payment';
 import Order from './views/orderPage/Order';
 import PlaceOrder from './views/placeorderPage/PlaceOrder';
+import StripeSuccess from './views/stripe/StripeSuccess';
+import StripeCancel from './views/stripe/StripeCancel';
 
 
 const App = () => {
@@ -79,6 +81,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/stripe-success" element={<StripeSuccess />} />
+          <Route path="/stripe-cancel" element={<StripeCancel />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

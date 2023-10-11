@@ -21,7 +21,7 @@ export const logo = (
 const Header = () => {
   const navigate = useNavigate();
   // Global state variable
-  const { user, isLoggedIn, dispatch } = useContext(UserCartContext);
+  const { user, cart, isLoggedIn, dispatch } = useContext(UserCartContext);
 
   // Local state variables
   const [showMenu, setShowMenu] = useState(false);
@@ -82,7 +82,11 @@ const Header = () => {
       <NavLink to={'/cart'} className={activeLink}>
         Cart
         <FaShoppingCart size={20} className="shopping-icon" />
-        <p className="quantity"> 0 </p>
+        <p className="quantity">
+          {cart.orderMeals.reduce((acc, curr) => {
+            return acc + curr.quantity;
+          }, 0)}
+        </p>
       </NavLink>
     </span>
   );

@@ -1,0 +1,76 @@
+@import '../../styles/Variables.scss';
+@import '../../styles/Mixins.scss';
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: $navbar-bg;
+
+  // Logo
+  .logo {
+    .church-name {
+      text-decoration: none;
+      font-size: $afs;
+    }
+  }
+
+  // Search bar styling
+  .search {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: $border;
+    border-radius: $radius;
+    background-color: white;
+    padding: 0.3rem;
+
+    .search-icon {
+      cursor: pointer;
+      margin-right: 1rem;
+      font-size: 1.4rem;
+
+      &:hover {
+        color: $red;
+      }
+    }
+
+    .navbar-input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      padding: 0.5rem 1rem;
+      font-size: $afs;
+
+      &::placeholder {
+        font-size: $afs;
+      }
+    }
+  }
+
+  // logged in user stayling
+  .loggedIn-user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3rem;
+
+    .user-name {
+      font-size: 1rem;
+    }
+
+    .image-container {
+      .user-photo {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  }
+}

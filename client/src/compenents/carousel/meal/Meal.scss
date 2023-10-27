@@ -35,7 +35,7 @@
   }
 
   .dish-price {
-    color: $title;
+    color: $green;
     font-weight: $aafw;
   }
 }
@@ -47,7 +47,7 @@
 }
 
 .addToCart-btn {
-  @include button;
+  @include button1;
 }
 
 .empty-stock-btn {

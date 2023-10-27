@@ -4,7 +4,7 @@ import axios from 'axios';
 import { FaUserAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AiFillEyeInvisible } from 'react-icons/ai';
 import { HiOutlineEye } from 'react-icons/hi';
 import { toast } from 'react-toastify';
@@ -87,7 +87,7 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(data));
       resetVariables();
       navigate('/');
-      return toast.success("You have successfully logged in!")
+      return toast.success('You have successfully logged in!');
     } catch (err) {
       console.log(err);
       dispatch({
@@ -139,6 +139,7 @@ const Login = () => {
               </label>
               <span className="input-highlight"></span>
             </div>
+
             <div className="input-container">
               <RiLockPasswordFill className="icon" />
               <input
@@ -158,6 +159,7 @@ const Login = () => {
                 {showPassword ? <AiFillEyeInvisible /> : <HiOutlineEye />}
               </span>
             </div>
+            
             <div className="login-checkbox-forget-password">
               <div className="login-checkbox-keep-signed-in">
                 <input
@@ -168,7 +170,7 @@ const Login = () => {
                 <span>Keep me signed in</span>
               </div>
               <div className="forget-password">
-                <a href=""> Forget your password? </a>
+                <Link to={'/forget-password'}> Forget your password? </Link>
               </div>
             </div>
 

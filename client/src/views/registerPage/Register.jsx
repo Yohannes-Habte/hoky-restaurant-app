@@ -313,7 +313,7 @@ const Register = () => {
                 <span className="input-highlight"></span>
                 <span
                   onClick={displayConfirmPassword}
-                  className="confirm-password-display"
+                  className="password-display"
                 >
                   {showConfirmPassword ? (
                     <AiFillEyeInvisible className="icon" />

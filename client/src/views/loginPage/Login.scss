@@ -3,6 +3,7 @@
 
 .lagin-page {
   width: 100%;
+  min-height: 100vh;
   padding: 1rem;
   z-index: 1;
 
@@ -13,7 +14,7 @@
   .login-container {
     width: $laptop;
     margin: 1rem auto;
-    @include shadow;
+    @include shadow1;
 
     .login-icon-container {
       width: 24%;
@@ -58,7 +59,7 @@
             left: 0;
             height: 2px;
             width: 0;
-            background-color: $title;
+            background-color: $green;
             transition: all 0.3s ease;
           }
 
@@ -123,7 +124,7 @@
         }
 
         .login-button {
-          @include btn1;
+          @include button3;
         }
 
         .haveNoAccount {
@@ -146,14 +147,14 @@
     .login-title {
       font-size: 2.5rem;
       text-align: center;
-      color: $title;
+      color: $green;
       padding: 2rem;
     }
 
     .login-container {
       width: 80%;
       margin: auto;
-      @include shadow;
+      @include shadow1;
 
       .login-icon-container {
         width: 12%;
@@ -184,6 +185,9 @@
 /* Labtop screen size */
 @media screen and (min-width: 1024px) {
   .lagin-page {
+    width: 100%;
+    min-height: 100vh;
+
     .login-title {
       @include title;
     }
@@ -191,7 +195,7 @@
     .login-container {
       width: 50%;
       margin: auto;
-      @include shadow;
+      @include shadow1;
 
       .login-icon-container {
         width: 12%;
@@ -235,7 +239,7 @@
               left: 0;
               height: 2px;
               width: 0;
-              background-color: $title;
+              background-color: $green;
               transition: all 0.3s ease;
             }
 

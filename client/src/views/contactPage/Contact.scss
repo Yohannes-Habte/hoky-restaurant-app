@@ -42,13 +42,13 @@
                 position: absolute;
                 top: 1rem;
                 left: 0.5rem;
-                color: $title;
+                color: $green;
               }
 
               .input-field {
                 @include inputField;
                 padding-left: 2rem;
-                border: 1px solid $title;
+                border: 1px solid $green;
                 border-radius: $radius;
                 cursor: pointer;
               }
@@ -69,7 +69,7 @@
                 left: 0;
                 height: 2px;
                 width: 0;
-                background-color: $title;
+                background-color: $green;
                 transition: all 0.3s ease;
               }
 
@@ -93,7 +93,7 @@
                 left: 2rem;
                 width: 33%;
                 height: 2.5rem;
-                color: $title;
+                color: $green;
                 border: none;
                 background-color: white;
               }
@@ -110,7 +110,7 @@
               width: 100%;
               padding: 1rem 2rem;
               font-size: 1.1rem;
-              border: 1px solid $title;
+              border: 1px solid $green;
               border-radius: $radius;
               cursor: pointer;
               outline: none;
@@ -120,7 +120,7 @@
               position: absolute;
               top: 1rem;
               left: 0.5rem;
-              color: $title;
+              color: $green;
             }
 
             .input-label {
@@ -139,7 +139,7 @@
               left: 0;
               height: 3px;
               width: 0;
-              background-color: $title;
+              background-color: $green;
               transition: all 0.3s ease;
             }
 
@@ -156,8 +156,8 @@
 
           // Button
           .contact-form-btn {
-            @include btn1;
-            border: 1px solid $title;
+            @include button3;
+            border: 1px solid $green;
           }
         }
       }
@@ -182,7 +182,7 @@
             font-size: 1.6rem;
             margin-right: 1rem;
             cursor: pointer;
-            color: $title;
+            color: $green;
           }
 
           .link-container {

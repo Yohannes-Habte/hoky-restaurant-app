@@ -3,7 +3,7 @@
 
 .footer {
   background-color: $footer-bg;
-  color: $footer-color;
+  color: $white;
 
   .footer-sections {
     display: flex;
@@ -29,7 +29,7 @@
           font-size: $afs;
 
           .nav-link {
-            color: $footer-color;
+            color: $white;
           }
         }
       }

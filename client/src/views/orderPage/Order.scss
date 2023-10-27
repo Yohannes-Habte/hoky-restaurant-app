@@ -22,7 +22,7 @@
 
       .ordered-meals-infos {
         .ordered-meals {
-          @include shadow;
+          @include shadow1;
           position: relative;
 
           .subTitle {
@@ -115,12 +115,12 @@
           }
         }
         .order-btn {
-          @include button;
+          @include button1;
           width: 100%;
         }
 
         .stripe-btn {
-          @include button;
+          @include button1;
         }
       }
     }

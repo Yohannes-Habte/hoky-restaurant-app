@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import './Contact.scss';
 import { Helmet } from 'react-helmet-async';
 import { FiPhoneCall } from 'react-icons/fi';
-import { MdClose, MdEmail, MdLocationOn } from 'react-icons/md';
+import {MdEmail, MdLocationOn } from 'react-icons/md';
 import { FaCloudUploadAlt, FaTwitterSquare, FaUserAlt } from 'react-icons/fa';
 import { BiSolidMessageDetail } from 'react-icons/bi';
-import './Contact.scss';
 import axios from 'axios';
-import Fetch from '../../globalFunction/GlobalFunction';
 
 // Initial State
 const initialSate = {

@@ -183,9 +183,9 @@
   opacity: 1;
 }
 .arrow {
-  border: 3px solid $title;
+  border: 3px solid $green;
   border-radius: 50%;
-  background: $title;
+  background: $green;
   color: #ffffff;
   width: 2.5rem;
   height: 2.5rem;
@@ -198,7 +198,7 @@
 
 .arrow:hover {
   background: #ffffff;
-  color: $title;
+  color: $green;
 }
 
 .next {
@@ -227,5 +227,5 @@ hr {
 }
 
 .btn {
-  @include button;
+  @include button1;
 }

@@ -1,0 +1,13 @@
+@import '../../styles/Variables.scss';
+@import '../../styles/Mixins.scss';
+
+.menu-page {
+  @include page;
+  .menu-page-container {
+    @include laptopPageContainer;
+
+    .title {
+      @include title;
+    }
+  }
+}

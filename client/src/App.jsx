@@ -15,7 +15,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { UserCartContext } from './context/userCart/UserCartProvider';
 import { USER_CART_ACTION } from './context/userCart/UserCartReducer';
 import Profile from './views/ProfilePage/Profile';
-import Reservation from './views/reservation Page/Reservation';
 import Menu from './views/menuPage/Menu';
 import Cart from './views/cartPage/Cart';
 import SingleMeal from './views/mealPage/SingleMeal';
@@ -24,6 +23,9 @@ import Order from './views/orderPage/Order';
 import PlaceOrder from './views/placeorderPage/PlaceOrder';
 import StripeSuccess from './views/stripe/StripeSuccess';
 import StripeCancel from './views/stripe/StripeCancel';
+import Forgetpassword from './views/passwordPage/Forgetpassword';
+import ResetPassword from './views/passwordPage/ResetPassword';
+import Reservation from './views/reservationPage/Reservation';
 
 
 const App = () => {
@@ -78,8 +80,10 @@ const App = () => {
           <Route path="/orders/:id" element={<Order />} />
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forget-password" element={<Forgetpassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/stripe-success" element={<StripeSuccess />} />
           <Route path="/stripe-cancel" element={<StripeCancel />} />

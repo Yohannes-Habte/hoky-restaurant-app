@@ -37,12 +37,12 @@
       }
 
       .update-image-btn {
-        @include btn2;
+        @include button3;
         margin: 1rem 0;
-        border: 1px solid $title;
+        border: 1px solid $green;
 
         .icon {
-          color: $title;
+          color: $green;
         }
       }
 
@@ -67,7 +67,7 @@
           position: absolute;
           top: 1rem;
           left: 0.5rem;
-          color: $title;
+          color: $green;
         }
         .input-field {
           @include inputField;
@@ -88,7 +88,7 @@
           left: 0;
           height: 2px;
           width: 0;
-          background-color: $title;
+          background-color: $green;
           transition: all 0.3s ease;
         }
 
@@ -111,7 +111,7 @@
       }
 
       .update-button {
-        @include btn1;
+        @include button3;
       }
     }
   }

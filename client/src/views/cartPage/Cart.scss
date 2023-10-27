@@ -103,7 +103,7 @@
               flex: 3;
               width: 30%;
               .quantity-btn {
-                @include btn2;
+                @include button1;
               }
               .quantity {
                 padding: 0 0.5rem 0 0.3rem;
@@ -150,7 +150,7 @@
           }
 
           .checkout-btn {
-            @include button;
+            @include button1;
             width: 100%;
           }
         }

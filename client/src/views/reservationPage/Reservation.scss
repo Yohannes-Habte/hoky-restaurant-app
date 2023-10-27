@@ -35,7 +35,7 @@
             position: absolute;
             top: 1rem;
             left: 0.5rem;
-            color: $title;
+            color: $green;
           }
 
           .input-field {
@@ -59,7 +59,7 @@
             left: 0;
             height: 2px;
             width: 0;
-            background-color: $title;
+            background-color: $green;
             transition: all 0.3s ease;
           }
 
@@ -91,7 +91,7 @@
           position: absolute;
           top: 1rem;
           left: 0.5rem;
-          color: $title;
+          color: $green;
         }
         .input-field {
           @include inputField;
@@ -114,7 +114,7 @@
           left: 0;
           height: 2px;
           width: 0;
-          background-color: $title;
+          background-color: $green;
           transition: all 0.3s ease;
         }
 
@@ -142,7 +142,7 @@
       }
 
       .reservation-btn {
-        @include btn1;
+        @include button3;
       }
     }
   }

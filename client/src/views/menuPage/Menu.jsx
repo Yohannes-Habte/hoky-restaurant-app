@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import './Menu.scss';
 
 const Menu = () => {
   return (
-    <div>Menu</div>
-  )
-}
-;
+    <main className="menu-page">
+      <section className="menu-page-container">
+        <h1 className="title">Menu</h1>
+      </section>
+    </main>
+  );
+};
 export default Menu;

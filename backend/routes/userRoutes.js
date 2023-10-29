@@ -4,12 +4,8 @@ import {
   getPhoto,
   getUser,
   getUsers,
-  loginUser,
-  logoutUser,
-  registerUser,
   updateUserPhoto,
   updateUserProfile,
-  userLoginStatus,
 } from '../controllers/userController.js';
 import { adminAuth, userAuth } from '../middleware.js/authMiddleware.js';
 
@@ -17,12 +13,8 @@ import { adminAuth, userAuth } from '../middleware.js/authMiddleware.js';
 const userRouter = express.Router();
 
 // User routes
-userRouter.post('/register', registerUser);
-userRouter.post('/login', loginUser);
-userRouter.get('/user/loginStatus', userLoginStatus);
 userRouter.get('/user/name', getName);
 userRouter.get('/user/photo', getPhoto);
-userRouter.get('/user/logout', logoutUser);
 userRouter.patch('/:id', userAuth, updateUserProfile);
 userRouter.patch('/:id/update-photo', userAuth, updateUserPhoto);
 userRouter.get('/:id', userAuth, getUser);

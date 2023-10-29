@@ -82,8 +82,8 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/forget-password" element={<Forgetpassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/forgotPassword" element={<Forgetpassword />} />
+          <Route path="/resetPassword/:token" element={<ResetPassword />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/stripe-success" element={<StripeSuccess />} />
           <Route path="/stripe-cancel" element={<StripeCancel />} />

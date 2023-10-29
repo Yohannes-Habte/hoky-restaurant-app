@@ -57,7 +57,7 @@ export const validateEmail = (email) => {
 // Get user login status
 export const getLoginStatus = async () => {
   const response = await axios.get(
-    process.env.REACT_APP_BACKEND_URL + '/api/users/user/loginStatus'
+    process.env.REACT_APP_BACKEND_URL + '/api/auths/loginStatus'
   );
   return response.data;
 };

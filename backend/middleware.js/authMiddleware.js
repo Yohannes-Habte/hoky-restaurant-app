@@ -59,3 +59,13 @@ export const adminAuth = async (req, res, next) => {
     throw new Error('User is not authorized!');
   }
 };
+
+// Global variables
+export const localVariables = (req, res, next) => {
+  req.app.locals = {
+    OTP: null,
+    resetSession: false,
+  };
+
+  next()
+};

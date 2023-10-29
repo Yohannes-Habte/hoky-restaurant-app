@@ -77,7 +77,7 @@ const Login = () => {
         password: password,
       };
       const { data } = await axios.post(
-        process.env.REACT_APP_BACKEND_URL + '/api/users/login',
+        process.env.REACT_APP_BACKEND_URL + '/api/auths/login',
         loginUser,
         { withCredentials: true }
       );

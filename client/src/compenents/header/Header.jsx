@@ -66,7 +66,7 @@ const Header = () => {
   // Logout user
   const logout = async () => {
     const { data } = await axios.get(
-      process.env.REACT_APP_BACKEND_URL + '/api/users/user/logout'
+      process.env.REACT_APP_BACKEND_URL + '/api/auths/logout'
     );
 
     dispatch({ type: USER_CART_ACTION.USER_LOG_OUT, payload: data });

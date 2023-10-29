@@ -158,7 +158,7 @@ const Register = () => {
       };
 
       const { data } = await axios.post(
-        process.env.REACT_APP_BACKEND_URL + '/api/users/register',
+        process.env.REACT_APP_BACKEND_URL + '/api/auths/register',
         userData,
         { withCredentials: true }
       );

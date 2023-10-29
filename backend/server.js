@@ -16,6 +16,7 @@ import commentRouter from './routes/commentRoutes.js';
 import globalErrorHandler from './middleware.js/globalErrorHandler.js';
 import formRouter from './routes/formRoutes.js';
 import orderRouter from './routes/orderRoute.js';
+import authRouter from './routes/authsRoutes.js';
 
 
 // Express app
@@ -31,6 +32,7 @@ app.use(
     credentials: true, // to send token from the backend to the frontend
   })
 );
+// app.disable("x-powered-by") // less hacker know about this stack
 
 // Create API for the paypal
 app.get('/api/keys/paypal', (req, res) => {
@@ -55,6 +57,7 @@ app.use(morgan('tiny'));
 
 // End points
 app.use('/api/users', userRouter);
+app.use("/api/auths", authRouter)
 app.use('/api/meals', mealRouter);
 app.use('/api/drinks', drinkRouter);
 app.use('/api/reservations', reservationRouter);

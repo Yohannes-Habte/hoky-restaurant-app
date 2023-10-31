@@ -170,7 +170,7 @@ const Login = () => {
                 <span>Keep me signed in</span>
               </div>
               <div className="forget-password">
-                <Link to={'/forget-password'}> Forget your password? </Link>
+                <Link to={'/forgotPassword'}> Forget your password? </Link>
               </div>
             </div>
 

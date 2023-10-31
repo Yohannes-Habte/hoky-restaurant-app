@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import { MdEmail } from 'react-icons/md';
 import './Password.scss';
 
-const Forgetpassword = () => {
+const Forgotpassword = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -22,7 +22,7 @@ const Forgetpassword = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        'http://localhost:5000/api/auths/forget-password',
+        'http://localhost:5000/api/auths/forgotPassword',
         {
           email,
         }
@@ -68,4 +68,4 @@ const Forgetpassword = () => {
   );
 };
 
-export default Forgetpassword;
+export default Forgotpassword;

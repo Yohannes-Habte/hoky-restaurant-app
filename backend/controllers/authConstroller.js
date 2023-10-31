@@ -296,7 +296,11 @@ export const forgotPassword = async (req, res, next) => {
     // const sent_from = process.env.EMAIL_USER;
 
     try {
-      await sendEmail(subject, message, send_to);
+      await sendEmail({
+        email: send_to,
+        subject: subject,
+        message: message,
+      });
 
       res.status(200).json({
         success: true,
@@ -351,11 +355,10 @@ export const resetingPassword = async (req, res, next) => {
 
     const { password, isAdmin, role, ...otherDetails } = user._doc;
 
-
     // Token of the user
     const loginToken = generateToken(user._id);
 
-      // Once the user reset the password, the user will log in automatically
+    // Once the user reset the password, the user will log in automatically
     return res
       .cookie('access_token', loginToken, {
         path: '/',

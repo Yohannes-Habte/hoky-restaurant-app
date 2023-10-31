@@ -1,14 +1,14 @@
 import nodemailer from 'nodemailer';
 
 // Create Email Sender Function
-const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
+const sendEmail = async (options) => {
   // Create Email transporter that sends email to the user
   const transporter = nodemailer.createTransport({
-    // service: "Gmail",
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
+    service: process.env.EMAIL_SERVICE,
     auth: {
-      user: process.env.EMAIL_USER,
+      user: process.env.EMAIL_SENDER,
       pass: process.env.EMAIL_PASSWORD,
     },
     tls: {
@@ -17,17 +17,15 @@ const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
   });
 
   // Options for sending Email
-  const options = {
-    from: 'Clineflix support<support@Clineflix.com>',
-    // form: sent_from,
-    to: send_to,
-    reployTo: reply_to,
-    subject: subject,
-    html: message,
+  const emailOptions = {
+    from: process.env.EMAIL_SENDER,
+    to: options.email,
+    subject: options.subject,
+    html: options.message,
   };
 
   // Send Email
-  await transporter.sendMail(options, function (err, infos) {
+  await transporter.sendMail(emailOptions, function (err, infos) {
     if (err) {
       console.log(err);
     } else {
